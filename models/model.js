@@ -11,7 +11,10 @@ Program.init(
             autoIncrement: true,
             primaryKey: true
         },
-        Name: {
+        day: {
+            type: DataTypes.STRING,
+        },
+        name: {
             type: DataTypes.STRING(30),
             unique: true,
         },
@@ -36,14 +39,18 @@ Exercise.init(
         },
         name: {
             type: DataTypes.STRING,
-            unique: true,
+            // unique: true,
         },
         reps: {
-            type: DataTypes.INTEGER
+            type: DataTypes.STRING
         },
         sets: {
             type: DataTypes.INTEGER
         },
+        category: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        }
     },    
     {
         modelName: 'exercise',
@@ -60,8 +67,8 @@ Schedule.init(
             autoIncrement: true,
             primaryKey: true
         },
-        Date: {
-            type: DataTypes.INTEGER,
+        date: {
+            type: DataTypes.STRING,
             unique: true,
         }
     },
@@ -124,5 +131,4 @@ Goal.belongsTo(Exercise, {foreignKey: 'exerciseId'})
 Schedule.hasMany(Goal, {foreignKey: 'scheduleId'})
 Goal.belongsTo(Schedule, {foreignKey: 'scheduleId'})
 
-await sequelize.sync({ force: true })
-await sequelize.close()
+export { sequelize, Schedule, Program, User, Exercise, Goal }
