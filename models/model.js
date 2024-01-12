@@ -1,6 +1,6 @@
 import Sequelize, { DataTypes, Model } from 'sequelize'
 
-const sequelize = new Sequelize('postgresql:///workout_app')
+const sequelize = new Sequelize('postgresql:///workout_app', { define: { underscored: true }})
 
 class Program extends Model {}
 
@@ -124,5 +124,5 @@ Goal.belongsTo(Exercise, {foreignKey: 'exerciseId'})
 Schedule.hasMany(Goal, {foreignKey: 'scheduleId'})
 Goal.belongsTo(Schedule, {foreignKey: 'scheduleId'})
 
-await sequelize.sync()
+await sequelize.sync({ force: true })
 await sequelize.close()
