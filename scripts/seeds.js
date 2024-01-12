@@ -287,23 +287,23 @@ const users = [
 
 const programs = [
     {
-        day: 'Monday',
+        number: 1,
         name: 'Glutes & Quads',
     },
     {
-        day: 'Tuesday',
+        number: 2,
         name: 'Back & Biceps',
     },
     {
-        day: 'Wednesday',
+        number: '3',
         name: 'Abs & Cardio',
     },
     {
-        day: 'Thursday',
+        number: 4,
         name: 'Glutes & Hamstrings',
     },
     {
-        day: 'Friday',
+        number: 5,
         name: 'Chest & Tricepts',
     },
 ]

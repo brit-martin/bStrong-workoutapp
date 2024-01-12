@@ -11,8 +11,8 @@ Program.init(
             autoIncrement: true,
             primaryKey: true
         },
-        day: {
-            type: DataTypes.STRING,
+        number: {
+            type: DataTypes.INTEGER,
         },
         name: {
             type: DataTypes.STRING(30),
