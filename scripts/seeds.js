@@ -149,7 +149,7 @@ const exercises = [
         name: 'Mountain Climbers',
         reps: '40',
         sets: 3,
-        category: 'Abs-1'
+        category: 'Abs-2'
     },
     {
         name: 'Tricep Pullover',
@@ -343,9 +343,16 @@ const schedules = [
 
 const goals = [
 
+    {
+        goal: '10 reps',
+    },
+    {
+        goal: '8 reps',
+    },
+    {
+        goal: '6 reps',
+    }
 ]
-
-
 
 
 await sequelize.sync({ force: true })
@@ -367,7 +374,7 @@ const GlutesAndQuadsExercises = await Exercise.findAll ({
     where: { category: { [Op.or]: ['Quads','Glutes-2']}}
 
 })
-for (let i = 0; i < GlutesAndQuadsExercises.length && i < 5; i++){
+for (let i = 0; i < GlutesAndQuadsExercises.length && i < 7; i++){
     await GlutesAndQuadsExercises[i].addProgram(GlutesAndQuadsProgram)
 }
 
@@ -378,7 +385,7 @@ const BackAndBicepsProgram = await Program.findOne({
 const BackAndBicepsExercises = await Exercise.findAll ({
     where: { category: { [Op.or]: ['Back', 'Biceps']}}
 })
-for (let i =0; i < BackAndBicepsExercises.length && i < 5; i++){
+for (let i =0; i < BackAndBicepsExercises.length && i < 7; i++){
     await BackAndBicepsExercises[i].addProgram(BackAndBicepsProgram)
 }
 
@@ -389,7 +396,7 @@ const AbsAndCardioProgram = await Program.findOne({
 const AbsAndCardioExercises = await Exercise.findAll({
     where: { category : {[Op.or]: ['Abs-1', 'Cardio']}}
 })
-for (let i=0; i < AbsAndCardioExercises.length && i < 5; i++){
+for (let i=0; i < AbsAndCardioExercises.length && i < 7; i++){
     await AbsAndCardioExercises[i].addProgram(AbsAndCardioProgram)
 }
 
@@ -400,7 +407,7 @@ const GlutesAndHamstringsProgram = await Program.findOne({
 const GlutesAndHamstringsExercises = await Exercise.findAll({
     where: {category: {[Op.or]: ['Glutes-1', 'Hamstrings']}}
 })
-for (let i=0; i < GlutesAndHamstringsExercises.length && i < 5; i++){
+for (let i=0; i < GlutesAndHamstringsExercises.length && i < 7; i++){
     await GlutesAndHamstringsExercises[i].addProgram(GlutesAndHamstringsProgram)
 }
 
@@ -411,7 +418,7 @@ const ChestAndTricepProgram = await Program.findOne({
 const ChestAndTricepExercises = await Exercise.findAll({
     where: {category: {[Op.or]: ['Chest', 'Tricep']}}
 })
-for (let i=0; i < ChestAndTricepExercises.length && i < 5; i++){
+for (let i=0; i < ChestAndTricepExercises.length && i < 7; i++){
     await ChestAndTricepExercises[i].addProgram(ChestAndTricepProgram)
 }
 
@@ -422,7 +429,7 @@ const ShouldersAndAbsProgram = await Program.findOne({
 const ShouldersAndAbsExercises = await Exercise.findAll({
     where: {category: {[Op.or]: ['Shoulder', 'Abs-2']}}
 })
-for (let i=0; i < ShouldersAndAbsExercises.length && i < 5; i++){
+for (let i=0; i < ShouldersAndAbsExercises.length && i < 7; i++){
     await ShouldersAndAbsExercises[i].addProgram(ShouldersAndAbsProgram)
 }
 
@@ -433,7 +440,7 @@ const CardioProgram = await Program.findOne({
 const CardioExercises = await Exercise.findAll({
     where: {category: 'Cardio' }
 })
-for (let i=0; i < CardioExercises.length && i < 5; i++){
+for (let i=0; i < CardioExercises.length && i < 7; i++){
     await CardioExercises[i].addProgram(CardioProgram)
 }
 
@@ -444,7 +451,7 @@ const ChestAndShouldersProgram = await Program.findOne({
 const ChestAndShouldersExercises = await Exercise.findAll({
     where: {category: {[Op.or]: ['Chest', 'Shoulder']} }
 })
-for (let i=0; i < ChestAndShouldersExercises.length && i < 5; i++){
+for (let i=0; i < ChestAndShouldersExercises.length && i < 7; i++){
     await ChestAndShouldersExercises[i].addProgram(ChestAndShouldersProgram)
 }
 

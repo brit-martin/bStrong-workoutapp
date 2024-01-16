@@ -16,6 +16,7 @@ Steps to implement my app---------------------
 1- I set up vite express
 2- created a models folder and created all my tables and there foreign keys
 3- created a seed folder that holds my table data
+4- made for loops in my seed folder that use sequelize queries to get all my data into my association table from the programs table and the exercise table.
 4- create end points that I need for my user
 5- 
 
@@ -23,7 +24,7 @@ Steps to implement my app---------------------
 
 TO DO:-----------------------
 get a basic component tree nailed down
-think of what end points i need
+think of what end points I need
 think of queries I need to get my data from my tables
 
 

@@ -1,8 +1,18 @@
 import Sequelize, { DataTypes, Model } from 'sequelize'
+import util from 'util'
 
-const sequelize = new Sequelize('postgresql:///workout_app', { define: { underscored: true }})
+const sequelize = new Sequelize('postgresql:///workout_app', { 
+    define: { 
+        underscored: true ,
+        timestamps: false,
+    }
+})
 
-class Program extends Model {}
+class Program extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON();
+      }
+}
 
 Program.init(
     {
@@ -25,7 +35,11 @@ Program.init(
         timestamps: false,
     })
 
-class Exercise extends Model {}
+class Exercise extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON();
+      }
+}
 
 Exercise.init(
     {
@@ -47,7 +61,7 @@ Exercise.init(
         category: {
             type: DataTypes.STRING,
             allowNull: false,
-        }
+        },
     },    
     {
         modelName: 'exercise',
@@ -55,7 +69,11 @@ Exercise.init(
         timestamps: false
     })
 
-class Schedule extends Model {}
+class Schedule extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON();
+      }
+}
 
 Schedule.init(
     {
@@ -75,7 +93,11 @@ Schedule.init(
         timestamps: false
     })
 
-class Goal extends Model {}
+class Goal extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON();
+      }
+}
 
 Goal.init(
     {
@@ -85,7 +107,9 @@ Goal.init(
             primaryKey: true
         },
         goal: {
-            type: DataTypes.INTEGER
+            type: DataTypes.STRING,
+            allowNull: false,
+
         }
     },
     {
@@ -94,7 +118,11 @@ Goal.init(
         timestamps: false
     })
 
-class User extends Model {}
+class User extends Model {
+    [util.inspect.custom]() {
+        return this.toJSON();
+      }
+}
 
 User.init(
     {
