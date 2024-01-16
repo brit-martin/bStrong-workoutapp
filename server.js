@@ -16,18 +16,26 @@ app.get('/workout', async (req, res) => {
     let programRegimen = await program.getExercises({
         attributes: ["name", "reps", "sets"]
     })
-    // console.log(programRegimen)
     res.status(200).send(programRegimen)
 
 })
 
+app.post('/new-rep', async (req, res) => {
+    let newGoal = req.body.goal
+    let scheduleId = req.body.scheduleId
+    let exerciseId = req.body.exerciseId
+    let userId = req.body.userId
+
+    let newGoalDbObject = await Goal.create({ goal: newGoal, user_id: userId, exercise_id: exerciseId, schedule_id: scheduleId})
+
+    res.status(200).send(newGoalDbObject)
+})
+
+// app.put('/favoriteRegimen', async (req, res) => {
+//     let favExercise = req.query.favExercise
+    
 
 
-// app.post('/new-rep', (req, res) => {
-//     let newRepAchieved = req.body
-//     Goal.push(newRepAchieved)
-
-//     res.status(200).send(Goal)
 // })
 
 // app.delete('/deleteRep/:rep', (req, res) => {
