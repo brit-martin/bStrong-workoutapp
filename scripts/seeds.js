@@ -11,7 +11,7 @@ const exercises = [
         name: 'Glute Bridge',
         reps: '10-12',
         sets: 4,
-        category: "Glutes"
+        category: "Glutes-1"
     },
     {
         name: 'Leg Press',
@@ -35,7 +35,7 @@ const exercises = [
         name: 'Glute Pullthroughs',
         reps: '12',
         sets: 3,
-        category: 'Glutes'
+        category: 'Glutes-2'
     },
     {
         name: 'Sumo Squat',
@@ -71,7 +71,7 @@ const exercises = [
         name: 'Glute Abductions',
         reps: '12-15',
         sets: 3,
-        category: 'Glutes'
+        category: 'Glutes-1'
     },
     {
         name: 'Quad Extensions',
@@ -137,19 +137,19 @@ const exercises = [
         name: 'Plank',
         reps: '1 minute',
         sets: 3,
-        category: 'Abs'
+        category: 'Abs-1'
     },
     {
         name: 'Russian Twists',
         reps: '30',
         sets: 3,
-        category: 'Abs'
+        category: 'Abs-2'
     },
     {
         name: 'Mountain Climbers',
         reps: '40',
         sets: 3,
-        category: 'Abs'
+        category: 'Abs-1'
     },
     {
         name: 'Tricep Pullover',
@@ -227,25 +227,25 @@ const exercises = [
         name: 'Deadbug',
         reps: '12',
         sets: 3,
-        category: 'Abs'
+        category: 'Abs-1'
     },
     {
         name: 'V-up',
         reps: '15',
         sets: 3,
-        category: 'Abs'
+        category: 'Abs-1'
     },
     {
         name: 'Flutter Kicks',
         reps: '35',
         sets: 3,
-        category: 'Abs'
+        category: 'Abs-2'
     },
     {
         name: 'Sit-ups',
         reps: '15',
         sets: 3,
-        category: 'Abs'
+        category: 'Abs-2'
     },
     {
         name: 'Burpee',
@@ -277,6 +277,12 @@ const exercises = [
         sets: 3,
         category: 'Cardio'
     },
+    {
+        name: 'Lying Banded Leg Raises',
+        reps: '15 each leg',
+        sets: 3,
+        category: 'Glutes-2'
+    },
 ]
 
 const users = [
@@ -299,7 +305,7 @@ const programs = [
         name: 'Glutes & Hamstrings',
     },
     {
-        name: 'Chest & Tricepts',
+        name: 'Chest & Triceps',
     },
     {
         name: 'Shoulders & Abs'
@@ -358,10 +364,10 @@ const GlutesAndQuadsProgram = await Program.findOne({
     where: { name: 'Glutes & Quads'}
 })
 const GlutesAndQuadsExercises = await Exercise.findAll ({
-    where: { category: { [Op.or]: ['Quads','Glutes']}}
+    where: { category: { [Op.or]: ['Quads','Glutes-2']}}
 
 })
-for (let i = 0; i < GlutesAndQuadsExercises.length; i++){
+for (let i = 0; i < GlutesAndQuadsExercises.length && i < 5; i++){
     await GlutesAndQuadsExercises[i].addProgram(GlutesAndQuadsProgram)
 }
 
@@ -372,7 +378,7 @@ const BackAndBicepsProgram = await Program.findOne({
 const BackAndBicepsExercises = await Exercise.findAll ({
     where: { category: { [Op.or]: ['Back', 'Biceps']}}
 })
-for (let i =0; i < BackAndBicepsExercises.length; i++){
+for (let i =0; i < BackAndBicepsExercises.length && i < 5; i++){
     await BackAndBicepsExercises[i].addProgram(BackAndBicepsProgram)
 }
 
@@ -381,9 +387,9 @@ const AbsAndCardioProgram = await Program.findOne({
     where: { name: 'Abs & Cardio'}
 })
 const AbsAndCardioExercises = await Exercise.findAll({
-    where: { category : {[Op.or]: ['Abs', 'Cardio']}}
+    where: { category : {[Op.or]: ['Abs-1', 'Cardio']}}
 })
-for (let i=0; i < AbsAndCardioExercises.length; i++){
+for (let i=0; i < AbsAndCardioExercises.length && i < 5; i++){
     await AbsAndCardioExercises[i].addProgram(AbsAndCardioProgram)
 }
 
@@ -392,15 +398,55 @@ const GlutesAndHamstringsProgram = await Program.findOne({
     where: { name: 'Glutes & Hamstrings'}
 })
 const GlutesAndHamstringsExercises = await Exercise.findAll({
-    where: {category: {[Op.or]: ['Glutes', 'Hamstrings']}}
+    where: {category: {[Op.or]: ['Glutes-1', 'Hamstrings']}}
 })
-for (let i=0; i < GlutesAndHamstringsExercises.length; i++){
+for (let i=0; i < GlutesAndHamstringsExercises.length && i < 5; i++){
     await GlutesAndHamstringsExercises[i].addProgram(GlutesAndHamstringsProgram)
 }
 
 
+const ChestAndTricepProgram = await Program.findOne({
+    where: { name: 'Chest & Triceps'}
+})
+const ChestAndTricepExercises = await Exercise.findAll({
+    where: {category: {[Op.or]: ['Chest', 'Tricep']}}
+})
+for (let i=0; i < ChestAndTricepExercises.length && i < 5; i++){
+    await ChestAndTricepExercises[i].addProgram(ChestAndTricepProgram)
+}
 
 
+const ShouldersAndAbsProgram = await Program.findOne({
+    where: { name: 'Shoulder & Abs'}
+})
+const ShouldersAndAbsExercises = await Exercise.findAll({
+    where: {category: {[Op.or]: ['Shoulder', 'Abs-2']}}
+})
+for (let i=0; i < ShouldersAndAbsExercises.length && i < 5; i++){
+    await ShouldersAndAbsExercises[i].addProgram(ShouldersAndAbsProgram)
+}
+
+
+const CardioProgram = await Program.findOne({
+    where: { name: 'Cardio'}
+})
+const CardioExercises = await Exercise.findAll({
+    where: {category: 'Cardio' }
+})
+for (let i=0; i < CardioExercises.length && i < 5; i++){
+    await CardioExercises[i].addProgram(CardioProgram)
+}
+
+
+const ChestAndShouldersProgram = await Program.findOne({
+    where: { name: 'Chest & Shoulders'}
+})
+const ChestAndShouldersExercises = await Exercise.findAll({
+    where: {category: {[Op.or]: ['Chest', 'Shoulder']} }
+})
+for (let i=0; i < ChestAndShouldersExercises.length && i < 5; i++){
+    await ChestAndShouldersExercises[i].addProgram(ChestAndShouldersProgram)
+}
 
 await Goal.bulkCreate(goals)
 
