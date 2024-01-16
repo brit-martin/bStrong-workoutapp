@@ -36,7 +36,7 @@ Exercise.init(
         },
         name: {
             type: DataTypes.STRING,
-            // unique: true,
+    
         },
         reps: {
             type: DataTypes.STRING

@@ -1,5 +1,5 @@
 import { sequelize, Exercise, Program, Schedule, Goal, User} from "../models/model.js"
-
+import { Op } from 'sequelize'
 const exercises = [
     {
         name: 'Sumo Squat',
@@ -315,23 +315,23 @@ const programs = [
 const schedules = [
     {   
         date: '1/1/24',
-        program_id: 1
+        
     },
     {   
         date: '1/2/24',
-        program_id: 2
+        
     },
     {   
         date: '1/3/24',
-        program_id: 3
+        
     },
     {   
         date: '1/4/24',
-        program_id: 4
+       
     },
     {   
         date: '1/5/24',
-        program_id: 5
+        
     },
 ]
 
@@ -346,8 +346,62 @@ await sequelize.sync({ force: true })
 
 await Exercise.bulkCreate(exercises)
 await User.bulkCreate(users)
-await Program.bulkCreate(programs)
-await Schedule.bulkCreate(schedules)
+
+const newPrograms = await Program.bulkCreate(programs)
+const newSchedules = await Schedule.bulkCreate(schedules)
+for(let i =0; i < newSchedules.length; i ++){
+    await newSchedules[i].setProgram(newPrograms[i])    
+}
+
+
+const GlutesAndQuadsProgram = await Program.findOne({
+    where: { name: 'Glutes & Quads'}
+})
+const GlutesAndQuadsExercises = await Exercise.findAll ({
+    where: { category: { [Op.or]: ['Quads','Glutes']}}
+
+})
+for (let i = 0; i < GlutesAndQuadsExercises.length; i++){
+    await GlutesAndQuadsExercises[i].addProgram(GlutesAndQuadsProgram)
+}
+
+
+const BackAndBicepsProgram = await Program.findOne({
+    where: {name: 'Back & Biceps'}
+})
+const BackAndBicepsExercises = await Exercise.findAll ({
+    where: { category: { [Op.or]: ['Back', 'Biceps']}}
+})
+for (let i =0; i < BackAndBicepsExercises.length; i++){
+    await BackAndBicepsExercises[i].addProgram(BackAndBicepsProgram)
+}
+
+
+const AbsAndCardioProgram = await Program.findOne({
+    where: { name: 'Abs & Cardio'}
+})
+const AbsAndCardioExercises = await Exercise.findAll({
+    where: { category : {[Op.or]: ['Abs', 'Cardio']}}
+})
+for (let i=0; i < AbsAndCardioExercises.length; i++){
+    await AbsAndCardioExercises[i].addProgram(AbsAndCardioProgram)
+}
+
+
+const GlutesAndHamstringsProgram = await Program.findOne({
+    where: { name: 'Glutes & Hamstrings'}
+})
+const GlutesAndHamstringsExercises = await Exercise.findAll({
+    where: {category: {[Op.or]: ['Glutes', 'Hamstrings']}}
+})
+for (let i=0; i < GlutesAndHamstringsExercises.length; i++){
+    await GlutesAndHamstringsExercises[i].addProgram(GlutesAndHamstringsProgram)
+}
+
+
+
+
+
 await Goal.bulkCreate(goals)
 
 await sequelize.close()
