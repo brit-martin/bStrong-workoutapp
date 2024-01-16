@@ -11,9 +11,6 @@ Program.init(
             autoIncrement: true,
             primaryKey: true
         },
-        number: {
-            type: DataTypes.INTEGER,
-        },
         name: {
             type: DataTypes.STRING(30),
             unique: true,
@@ -116,19 +113,19 @@ User.init(
         timestamps: false
     })
 
-Schedule.hasMany(Program, { foreignKey: 'scheduleId' })    
-Program.belongsTo(Schedule, { foreignKey: 'scheduleId' }) 
+Schedule.belongsTo(Program, { foreignKey: 'programId' })
+Program.hasMany(Schedule, { foreignKey: 'programId' })
 
-Program.hasMany(Exercise, {foreignKey:'programId'})
-Exercise.belongsTo(Program, {foreignKey:'programId'})
+User.hasMany(Goal, { foreignKey: 'userId' })
+Goal.belongsTo(User, { foreignKey: 'userId' })
 
-User.hasMany(Goal, {foreignKey: 'userId'})
-Goal.belongsTo(User, {foreignKey: 'userId'})
+Exercise.hasMany(Goal, { foreignKey: 'exerciseId' })
+Goal.belongsTo(Exercise, { foreignKey: 'exerciseId' })
 
-Exercise.hasMany(Goal, {foreignKey: 'exerciseId'})
-Goal.belongsTo(Exercise, {foreignKey: 'exerciseId'})
+Schedule.hasMany(Goal, { foreignKey: 'scheduleId' })
+Goal.belongsTo(Schedule, { foreignKey: 'scheduleId' })
 
-Schedule.hasMany(Goal, {foreignKey: 'scheduleId'})
-Goal.belongsTo(Schedule, {foreignKey: 'scheduleId'})
+Exercise.belongsToMany (Program, { through: 'ExercisePrograms' })
+Program.belongsToMany (Exercise, { through: 'ExercisePrograms' })
 
 export { sequelize, Schedule, Program, User, Exercise, Goal }

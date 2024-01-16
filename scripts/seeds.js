@@ -287,48 +287,51 @@ const users = [
 
 const programs = [
     {
-        number: 1,
         name: 'Glutes & Quads',
     },
     {
-        number: 2,
         name: 'Back & Biceps',
     },
     {
-        number: '3',
         name: 'Abs & Cardio',
     },
     {
-        number: 4,
         name: 'Glutes & Hamstrings',
     },
     {
-        number: 5,
         name: 'Chest & Tricepts',
+    },
+    {
+        name: 'Shoulders & Abs'
+    },
+    {
+        name: 'Cardio'
+    },
+    {
+        name: 'Chest & Shoulders'
     },
 ]
 
-const schedule = [
+const schedules = [
     {   
-        date: 1-1-24, 
+        date: '1/1/24',
+        program_id: 1
     },
     {   
-        date: 1/2/24, 
+        date: '1/2/24',
+        program_id: 2
     },
     {   
-        date: 1/3/24, 
+        date: '1/3/24',
+        program_id: 3
     },
     {   
-        date: 1/4/24, 
+        date: '1/4/24',
+        program_id: 4
     },
     {   
-        date: 1/5/24, 
-    },
-    {   
-        date: 1/6/24, 
-    },
-    {   
-        date: 1/7/24, 
+        date: '1/5/24',
+        program_id: 5
     },
 ]
 
@@ -344,7 +347,7 @@ await sequelize.sync({ force: true })
 await Exercise.bulkCreate(exercises)
 await User.bulkCreate(users)
 await Program.bulkCreate(programs)
-await Schedule.bulkCreate(schedule)
+await Schedule.bulkCreate(schedules)
 await Goal.bulkCreate(goals)
 
 await sequelize.close()

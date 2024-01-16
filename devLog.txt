@@ -1,2 +1,29 @@
 Personal Project Journal---
+What I would like my app to do...
+I would like to have Monday-Friday cards be up on the home page on page load.
+I would like the user to be able to click on the exercise button associated with that day.
+When the button is clicked I would like a pop up to appear that has the 5 work outs associated 
+with that day to appear.
+The user should be able to input how many reps they were able to accomplish.
+At the bottom there should be a save button and a reset button so they can save there
+reps or reset if they need to change them.
+I would also like to have the user be able to favorite a program so they can go back and
+see which ones they liked.
+
+
+
+Steps to implement my app---------------------
+1- I set up vite express
+2- created a models folder and created all my tables and there foreign keys
+3- created a seed folder that holds my table data
+4- create end points that I need for my user
+5- 
+
+
+
+TO DO:-----------------------
+get a basic component tree nailed down
+think of what end points i need
+think of queries I need to get my data from my tables
+
 
