@@ -1,15 +1,23 @@
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 2;
+    position: absolute;
+    top: 100px;
+    left: 15vw;
+    width: 70vw;
+    height: 70vh;
+    /* z-index: 2; */
+    background-color: aqua;
+    overflow: scroll;
+    border: 3px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 20px 20px 20px;
 }
 
 .modal-box {
-    position: absolute;
-    width: 50%;
+    /* position: absolute; */
+    /* width: 50%;
     min-width: 310px;
     max-width: 700px;
     height: 90%;
@@ -19,14 +27,14 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    padding: 10px;
+    padding: 10px; */
 }
 
 .modal-background {
-    position: fixed;
+    /* position: fixed;
     background-color: rgba(9,9,9,0.5);
     backdrop-filter: blur(20px);
     z-index: 3;
     width: 100%;
-    height: 100%;
+    height: 100%; */
 }
