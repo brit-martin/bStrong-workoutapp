@@ -31,26 +31,29 @@ app.post('/new-rep', async (req, res) => {
     res.status(200).send(newGoalDbObject)
 })
 
-// app.put('/favoriteRegimen', async (req, res) => {
-//     let favExercise = req.query.favExercise
-    
+app.put('/favorite-regimen', async (req, res) => {
+    let favExerciseId = req.query.id
+    console.log(favExerciseId)
+    let favoriteProgramObj = await Program.findOne({
+        where: { id: favExerciseId }
+    })
+    let updatedFavTable = await favoriteProgramObj.update({isFav: "true"})
+
+    res.status(200).send(updatedFavTable)
+})
 
 
-// })
 
-app.delete('/delete-rep/', async (req, res) => {
+app.delete('/delete-rep', async (req, res) => {
     let scheduleId = req.query.scheduleId
     console.log(scheduleId)
     let deleteScheduleId = await Goal.destroy ({
         where: { schedule_id: scheduleId}
     })
-    res.send(200).send(deleteScheduleId)
+    res.status(200).send(deleteScheduleId)
     console.log(deleteScheduleId)
 
 })
-
-
-
 
 
 

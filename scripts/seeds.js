@@ -294,27 +294,35 @@ const users = [
 const programs = [
     {
         name: 'Glutes & Quads',
+        isFav: false,
     },
     {
         name: 'Back & Biceps',
+        isFav: false,
     },
     {
         name: 'Abs & Cardio',
+        isFav: false,
     },
     {
         name: 'Glutes & Hamstrings',
+        isFav: false,
     },
     {
         name: 'Chest & Triceps',
+        isFav: false,
     },
     {
-        name: 'Shoulders & Abs'
+        name: 'Shoulders & Abs',
+        isFav: false,
     },
     {
-        name: 'Cardio'
+        name: 'Cardio',
+        isFav: false,
     },
     {
-        name: 'Chest & Shoulders'
+        name: 'Chest & Shoulders',
+        isFav: false,
     },
 ]
 
