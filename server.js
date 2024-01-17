@@ -12,7 +12,7 @@ app.get('/workout', async (req, res) => {
         where: { id: programId },
     })
 
-    console.log(program)
+    // console.log(program)
     let programRegimen = await program.getExercises({
         attributes: ["name", "reps", "sets"]
     })
@@ -38,10 +38,20 @@ app.post('/new-rep', async (req, res) => {
 
 // })
 
-// app.delete('/deleteRep/:rep', (req, res) => {
-//     let rep = req.params.rep
+app.delete('/delete-rep/', async (req, res) => {
+    let scheduleId = req.query.scheduleId
+    console.log(scheduleId)
+    let deleteScheduleId = await Goal.destroy ({
+        where: { schedule_id: scheduleId}
+    })
+    res.send(200).send(deleteScheduleId)
+    console.log(deleteScheduleId)
 
-// })
+})
+
+
+
+
 
 
 ViteExpress.listen(app, 8080, () => {

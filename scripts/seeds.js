@@ -345,12 +345,21 @@ const goals = [
 
     {
         goal: '10 reps',
+        userId: 1,
+        scheduleId: 1,
+        exerciseId: 1,
     },
     {
         goal: '8 reps',
+        userId: 1,
+        scheduleId: 1,
+        exerciseId: 2,
     },
     {
         goal: '6 reps',
+        userId: 1,
+        scheduleId: 2,
+        exerciseId: 3,
     }
 ]
 
