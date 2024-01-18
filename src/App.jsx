@@ -1,52 +1,45 @@
 import Exercise from './Exercise.jsx'
-import {useState} from 'react'
+import { useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css'
+import axios from 'axios'
+
+
 
 function App() {
 
   let [displayedProgramId, setDisplayedProgramId] = useState(-1)
  
-  // console.log(displayedProgramId)
+  const [programObjs, setProgramObjs] = useState([])
+
+  useEffect(() => {
+    axios.get('/this-weeks-program')
+    .then((response) => {
+      setProgramObjs(response.data)
+    })
+    .catch((error) => {
+      console.log(error)
+    })
+  })
+
+  const weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
+
   return (
    
     < div className="app">
      <h1>Workouts of the Week</h1>
             <div>
-                <h2 className='day'>Monday</h2>
-                <h5>Glutes & Quads</h5>
-                <button onClick={() => setDisplayedProgramId(1)}>Exercises</button>
-                {displayedProgramId === 1 && <Exercise displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}/>}
-            </div>
-            <div>
-                <h2 className='day'>Tuesday</h2>
-                <h5>Back & Biceps</h5>
-                <button onClick={() => setDisplayedProgramId(2)}>Exercises</button>
-                {displayedProgramId === 2 && <Exercise displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}/>}
-            </div>
-            <div>
-                <h2 className='day'>Wednesday</h2>
-                <h5>Abs & Cardio</h5>
-                <button onClick = {() => setDisplayedProgramId(3)}>Exercises</button>
-                {displayedProgramId === 3 && <Exercise displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}/>}
-            </div>
-            <div>
-                <h2 className='day'>Thursday</h2>
-                <h5>Hamstrings & Glutes</h5>
-                <button onClick = {() => setDisplayedProgramId(4)}>Exercises</button>
-                {displayedProgramId === 4 && <Exercise displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}/>}
-            </div>
-            <div>
-                <h2 className='day'>Friday</h2>
-                <h5>Chest & Triceps</h5>
-                <button onClick ={() => setDisplayedProgramId(5)}>Exercises</button>
-                {displayedProgramId === 5 && <Exercise displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}/>}
-            </div>
-     
+              {programObjs.map((element, index) => {
+                return <div key={element.id}>
+                        <h2>{weeks[index]}</h2>  
+                        <h5>{element.name}</h5>
+                        <button onClick={() => setDisplayedProgramId(element.programId)}>Exercises</button>
+                        {displayedProgramId === (element.programId) && <Exercise displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}/>}
+                  </div>
+              })
+            }
+            </div>    
     </div>
-
-    
-
   )
 }
 

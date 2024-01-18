@@ -44,13 +44,12 @@ app.get('/this-weeks-program', async (req, res) => {
         let scheduleObj = thisWeeksSchedules[i]
         // console.log(scheduleObj)
        
-        let theProgram = await scheduleObj.getProgram({
-            attributes: ["name"]
-        })      
+        let theProgram = await scheduleObj.getProgram()      
         // console.log(theProgram) 
       
         oneDateNameObj.date = thisWeeksSchedules[i].date
         oneDateNameObj.name = theProgram.name
+        oneDateNameObj.programId = theProgram.id
         dateNameObjs.push(oneDateNameObj)
     }  
   res.status(200).send(dateNameObjs) 
