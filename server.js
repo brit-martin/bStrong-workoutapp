@@ -1,6 +1,7 @@
 import express from 'express'
 import ViteExpress from 'vite-express'
 import { Exercise, Program, Schedule, Goal, User } from './models/model.js'
+import {Op} from 'sequelize'
 
 const app = express()
 
@@ -20,6 +21,42 @@ app.get('/workout', async (req, res) => {
     res.status(200).send(programRegimen)
 
 })
+
+
+app.get('/this-weeks-program', async (req, res) => {
+    
+    let datesOfThisWeek = [
+        '2024-01-01',
+        '2024-01-02',
+        '2024-01-03',
+        '2024-01-04',
+        '2024-01-05',
+    ]
+
+    let thisWeeksSchedules = await Schedule.findAll({
+        where: { date: { [Op.in]: datesOfThisWeek}},
+        order: [['date', 'ASC']]
+    })
+    // console.log(thisWeeksSchedules)
+    let dateNameObjs = []
+    for(let i =0; i < thisWeeksSchedules.length; i++){
+        let oneDateNameObj = {}
+        let scheduleObj = thisWeeksSchedules[i]
+        // console.log(scheduleObj)
+       
+        let theProgram = await scheduleObj.getProgram({
+            attributes: ["name"]
+        })      
+        // console.log(theProgram) 
+      
+        oneDateNameObj.date = thisWeeksSchedules[i].date
+        oneDateNameObj.name = theProgram.name
+        dateNameObjs.push(oneDateNameObj)
+    }  
+  res.status(200).send(dateNameObjs) 
+
+})
+
 
 app.post('/new-rep', async (req, res) => {
     let newGoal = req.body.goal

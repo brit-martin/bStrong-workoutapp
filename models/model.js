@@ -6,7 +6,8 @@ const sequelize = new Sequelize('postgresql:///workout_app', {
     define: { 
         underscored: true ,
         timestamps: false,
-    }
+    },
+    dialectOptions:{useUTC:true}
 })
 
 class Program extends Model {
@@ -84,7 +85,7 @@ Schedule.init(
             primaryKey: true
         },
         date: {
-            type: DataTypes.STRING,
+            type: DataTypes.DATEONLY,
             unique: true,
         }
     },

@@ -17,22 +17,17 @@ export default function Exercise(props){
             
         
         })
-
-        
-       
-
-        
-
     }, [])
 
     function FavoriteButton(){
-        // axios.put(`/favorite-regimen?id=${}`)
-        // .then((response) => {
-          
-        // })
-        // .catch((error)=>{
-        //     console.log(error)
-        // })  
+        alert('workout favorited')
+        axios.put(`/favorite-regimen?id=${props.displayedProgramId}`)
+        .then((response) => {
+            console.log(response.data)
+        })
+        .catch((error)=>{
+            console.log(error)
+        })  
         
     }
 
@@ -55,9 +50,6 @@ export default function Exercise(props){
 
     }
 
-
-
-
     return (
         <>
         <Modal 
@@ -73,15 +65,15 @@ export default function Exercise(props){
 
             <Modal.Body>
                 <div>
-                    {exercises.map((element, index) => {
-                        return <>
-                                <h3 key={element.ExercisePrograms.exerciseId}>{element.name}</h3>
-                                <label>Reps:</label>
-                                <input type="text" name ="reps"/>
+                    {exercises.map((element) => {
+                        return <div key={element.ExercisePrograms.exerciseId}>
+                                <h3 >{element.name}</h3>
                                 <p>Goal: {element.reps}</p>
+                                <label>Reps:</label> 
+                                <input type="text" name ="reps"/><Button onClick={SaveButton}>Save</Button>
                                 <p>Sets: {element.sets}</p>
-                                <Button onClick={SaveButton}>Save</Button> 
-                            </>       
+                                
+                            </div>       
                         })
                     }           
                 </div>
@@ -90,7 +82,7 @@ export default function Exercise(props){
 
             <Modal.Footer>
                 <Button>Reset</Button>
-                <Button>Favorite</Button>
+                <Button onClick={FavoriteButton}>Favorite</Button>
             </Modal.Footer>
 
         </Modal>

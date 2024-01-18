@@ -3,133 +3,133 @@ import { Op } from 'sequelize'
 const exercises = [
     {
         name: 'Sumo Squat',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 4,
         category: 'Quads'
     },
     {
         name: 'Glute Bridge',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 4,
         category: "Glutes-1"
     },
     {
         name: 'Leg Press',
-        reps: '8',
+        reps: '8 reps',
         sets: 4,
         category: 'Quads'
     },
     {
         name: 'Reverse Lunge',
-        reps: '10 each leg',
+        reps: '10 reps each leg',
         sets: 3,
         category: 'Quads'
     },
     {
         name: 'Box Jumps',
-        reps: '12-14',
+        reps: '12-14 reps',
         sets: 4,
         category: 'Quads'
     },
     {
         name: 'Glute Pullthroughs',
-        reps: '12',
+        reps: '12 reps',
         sets: 3,
         category: 'Glutes-2'
     },
     {
         name: 'Sumo Squat',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 4,
         category: 'Hamstrings'
     },
     {
         name: 'Barbell Squats',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 4,
         category: 'Hamstrings'
     },
     {
         name: 'Single Leg Deadlift',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 4,
         category: 'Hamstrings'
     },
     {
         name: 'Hamstring Curl',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 4,
         category: 'Hamstrings'
     },
     {
         name: 'Single Leg Hamstring Curl',
-        reps: '8-10 Each Leg',
+        reps: '8-10 reps Each Leg',
         sets: 4,
         category: 'Hamstrings'
     },
     {
         name: 'Glute Abductions',
-        reps: '12-15',
+        reps: '12-15 reps',
         sets: 3,
         category: 'Glutes-1'
     },
     {
         name: 'Quad Extensions',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 3,
         category: 'Quads'
     },
     {
         name: 'Bicep Curls',
-        reps: '10-12 each arm',
+        reps: '10-12 reps each arm',
         sets: 4,
         category: 'Biceps'
     },
     {
         name: 'Hammerhead Curl',
-        reps: '10-12 each arm',
+        reps: '10-12 reps each arm',
         sets: 4,
         category: 'Biceps'
     },
     {
         name: 'Inverted Bicep Curl',
-        reps: '20',
+        reps: '20 reps',
         sets: 3,
         category: 'Biceps'
     },
     {
         name: 'Back Fly',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 4,
         category: 'Back'
     },
     {
         name: 'Seated Cable Row',
-        reps: '10',
+        reps: '10 reps',
         sets: 4,
         category: 'Back'
     },
     {
         name: 'Lat Pull Downs',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 4,
         category: 'Back'
     },
     {
         name: 'Assisted Pull ups',
-        reps: '10',
+        reps: '10 reps',
         sets: 4,
         category: 'Back'
     },
     {
         name: 'Single Arm Lat Pull Down',
-        reps: '10',
+        reps: '10 reps',
         sets: 3,
         category: 'Back'
     },
     {
         name: 'Romanian Deadlift',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 4,
         category: 'Back'
     },
@@ -141,145 +141,145 @@ const exercises = [
     },
     {
         name: 'Russian Twists',
-        reps: '30',
+        reps: '30 reps',
         sets: 3,
         category: 'Abs-2'
     },
     {
         name: 'Mountain Climbers',
-        reps: '40',
+        reps: '40 reps',
         sets: 3,
         category: 'Abs-2'
     },
     {
         name: 'Tricep Pullover',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 4,
         category: 'Tricep'
     },
     {
         name: 'Skull Crusher',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 3,
         category: 'Tricep'
     },
     {
         name: 'Seated Shoulder Press',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 3,
         category: 'Shoulders'
     },
     {
         name: 'Lying Bench Press',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 4,
         category: 'Chest'
     },
     {
         name: 'Incline Lateral Raise',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 3,
         category: 'Shoulder'
     },
     {
         name: 'Front Raises',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 3,
         category: 'Shoulder'
     },
     {
         name: 'Upright Row',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 3,
         category: 'Shoulder'
     },
     {
         name: 'T-bar Row',
-        reps: '8-10',
+        reps: '8-10 reps',
         sets: 3,
         category: 'Back'
     },
     {
         name: 'Pushups',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 4,
         category: 'Chest'
     },
     {
         name: 'Incline Fly',
-        reps: '10',
+        reps: '10 reps',
         sets: 3,
         category: 'Chest'
     }, 
     {
         name: 'Dumbbell Pullover',
-        reps: '10-12',
+        reps: '10-12 reps',
         sets: 3,
         category: 'Chest'
     }, 
     {
         name: 'Standing Cross-body Dumbbell raise',
-        reps: '10 each arm',
+        reps: '10 reps each arm',
         sets: 3,
         category: 'Chest'
     },
     {
         name: 'Deadbug',
-        reps: '12',
+        reps: '12 reps',
         sets: 3,
         category: 'Abs-1'
     },
     {
         name: 'V-up',
-        reps: '15',
+        reps: '15 reps',
         sets: 3,
         category: 'Abs-1'
     },
     {
         name: 'Flutter Kicks',
-        reps: '35',
+        reps: '35 reps',
         sets: 3,
         category: 'Abs-2'
     },
     {
         name: 'Sit-ups',
-        reps: '15',
+        reps: '15 reps',
         sets: 3,
         category: 'Abs-2'
     },
     {
         name: 'Burpee',
-        reps: '15',
+        reps: '15 reps',
         sets: 3,
         category: 'Cardio'
     },
     {
         name: 'Squat Jumps',
-        reps: '18',
+        reps: '18 reps',
         sets: 3,
         category: 'Cardio'
     },
     {
         name: 'Jumping Jacks',
-        reps: '50',
+        reps: '50 reps',
         sets: 3,
         category: 'Cardio'
     },
     {
         name: 'Squat Jumps',
-        reps: '18',
+        reps: '18 reps',
         sets: 3,
         category: 'Cardio'
     },
     {
         name: 'Step Ups',
-        reps: '25',
+        reps: '25 reps',
         sets: 3,
         category: 'Cardio'
     },
     {
         name: 'Lying Banded Leg Raises',
-        reps: '15 each leg',
+        reps: '15 reps each leg',
         sets: 3,
         category: 'Glutes-2'
     },
@@ -328,23 +328,23 @@ const programs = [
 
 const schedules = [
     {   
-        date: '1/1/24',
+        date: '2024-01-01',
         
     },
     {   
-        date: '1/2/24',
+        date: '2024-01-02',
         
     },
     {   
-        date: '1/3/24',
+        date: '2024-01-03',
         
     },
     {   
-        date: '1/4/24',
+        date: '2024-01-04',
        
     },
     {   
-        date: '1/5/24',
+        date: '2024-01-05',
         
     },
 ]
@@ -473,5 +473,7 @@ for (let i=0; i < ChestAndShouldersExercises.length && i < 7; i++){
 }
 
 await Goal.bulkCreate(goals)
+
+console.log(newSchedules)
 
 await sequelize.close()
