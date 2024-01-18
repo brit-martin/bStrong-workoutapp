@@ -1,7 +1,8 @@
 import Sequelize, { DataTypes, Model } from 'sequelize'
 import util from 'util'
 
-const sequelize = new Sequelize('postgresql:///workout_app', { 
+const sequelize = new Sequelize('postgresql:///workout_app', {
+    logging: false,
     define: { 
         underscored: true ,
         timestamps: false,

@@ -8,6 +8,7 @@ app.use(express.json())
 
 app.get('/workout', async (req, res) => {
     let programId = +req.query.programId
+
     let program = await Program.findOne({
         where: { id: programId },
     })

@@ -1,61 +1,98 @@
-import { useState } from 'react'
-// import './exercise.css'
+import { useState, useEffect } from 'react'
+import './exercise.css'
 import {Button, Modal} from 'react-bootstrap';
+import axios from 'axios'
 
 export default function Exercise(props){
-    const { setDisplayedProgramId } = props
 
+    const { setDisplayedProgramId } = props
     const [show, setShow] = useState(true);
+    const [exercises, setExercises] = useState([])
+
+    useEffect(() => {
+        axios.get(`/workout?programId=${props.displayedProgramId}`)
+        .then((response) => {
+            setExercises(response.data)
+            console.log(response.data)
+            
+        
+        })
+
+        
+       
+
+        
+
+    }, [])
+
+    function FavoriteButton(){
+        // axios.put(`/favorite-regimen?id=${}`)
+        // .then((response) => {
+          
+        // })
+        // .catch((error)=>{
+        //     console.log(error)
+        // })  
+        
+    }
+
+    function SaveButton(){
+        alert('button was clicked')
+        return (
+            <>
+    
+            </>
+        )
+    }
+
+    function ResetButton(){
+        const [currentInput, setCurrentInput]= useState()
+
+       
+    }
+
+    function RepsInputField (){
+
+    }
+
+
+
+
     return (
         <>
         <Modal 
-        size="xl"
+        size="lg"
         show={show}
         aria-labelledby="contained-modal-title-vcenter"
         centered
         >
-    
             <Modal.Header closeButton onHide={() => setShow(false) & setDisplayedProgramId(-1)}>
-                <Modal.Title id="contained-modal-title-vcenter">Workout Program</Modal.Title>
+                <Modal.Title id="contained-modal-title-vcenter">Workout Program
+                </Modal.Title>
             </Modal.Header>
+
             <Modal.Body>
-                
-                    <h3>Sumo Squats</h3>
-                    <label>Reps:</label>
-                    <input type="text" name ="reps"/><p>Goal: 8-10 Reps</p>
-                    <p>Sets: 4</p>
-                    <Button>Save</Button>    
-                
-                    <h3>Glute Bridge</h3>
-                    <label>Reps:</label>
-                    <input type="text" name ="reps"/><p>Goal: 10 Reps</p>
-                    <p>Sets: 4</p>
-                    <Button>Save</Button>    
-                
-                    <h3>Leg Press</h3>
-                    <label>Reps:</label>
-                    <input type="text" name ="reps"/><p>Goal: 9 Reps</p>
-                    <p>Sets: 4</p>
-                    <Button>Save</Button>    
-               
-                    <h3>Reverse Lunge</h3>
-                    <label>Reps:</label>
-                    <input type="text" name ="reps"/><p>Goal: 10 Reps</p>
-                    <p>Sets: 4</p>
-                    <Button>Save</Button>    
-              
-                    <h3>Box Jumps</h3>
-                    <label>Reps:</label>
-                    <input type="text" name ="reps"/><p>Goal: 8-10 Reps</p>
-                    <p>Sets: 4</p>
-                    <Button>Save</Button>    
-                
+                <div>
+                    {exercises.map((element, index) => {
+                        return <>
+                                <h3 key={element.ExercisePrograms.exerciseId}>{element.name}</h3>
+                                <label>Reps:</label>
+                                <input type="text" name ="reps"/>
+                                <p>Goal: {element.reps}</p>
+                                <p>Sets: {element.sets}</p>
+                                <Button onClick={SaveButton}>Save</Button> 
+                            </>       
+                        })
+                    }           
+                </div>
+
             </Modal.Body>
+
             <Modal.Footer>
                 <Button>Reset</Button>
                 <Button>Favorite</Button>
-                {/* <div className="modal-background" onClick={setDisplayedProgramId}></div> */}
             </Modal.Footer>
+
         </Modal>
         </>
     )
