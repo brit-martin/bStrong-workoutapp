@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react'
-import './exercise.css'
+// import './exercise.css'
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios'
+import Exercise from './Exercise.jsx'
 
-export default function Exercise(props){
+export default function Program(props){
 
-    const { setDisplayedProgramId } = props
-    const [show, setShow] = useState(true);
-    const [exercises, setExercises] = useState([])
+    let { setDisplayedProgramId } = props
+    let [show, setShow] = useState(true);
+    let [exercises, setExercises] = useState([])
 
     useEffect(() => {
         axios.get(`/workout?programId=${props.displayedProgramId}`)
@@ -31,22 +32,8 @@ export default function Exercise(props){
         
     }
 
-    function SaveButton(){
-        alert('button was clicked')
-        return (
-            <>
-    
-            </>
-        )
-    }
-
-    function ResetButton(){
-        const [currentInput, setCurrentInput]= useState()
-
-       
-    }
-
-    function RepsInputField (){
+   
+    function ResetRepsButton(){
 
     }
 
@@ -66,14 +53,10 @@ export default function Exercise(props){
             <Modal.Body>
                 <div>
                     {exercises.map((element) => {
-                        return <div key={element.ExercisePrograms.exerciseId}>
-                                <h3 >{element.name}</h3>
-                                <p>Goal: {element.reps}</p>
-                                <label>Reps:</label> 
-                                <input type="text" name ="reps"/><Button onClick={SaveButton}>Save</Button>
-                                <p>Sets: {element.sets}</p>
-                                
-                            </div>       
+                        return <Exercise 
+                            key={element.ExercisePrograms.exerciseId}
+                                element={element}
+                            />
                         })
                     }           
                 </div>
@@ -81,7 +64,7 @@ export default function Exercise(props){
             </Modal.Body>
 
             <Modal.Footer>
-                <Button>Reset</Button>
+                <Button onClick={ResetRepsButton}>Reset</Button>
                 <Button onClick={FavoriteButton}>Favorite</Button>
             </Modal.Footer>
 

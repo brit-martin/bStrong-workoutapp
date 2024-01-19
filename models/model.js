@@ -115,7 +115,7 @@ Goal.init(
         }
     },
     {
-        modelName:'goal',
+        modelName: 'goal',
         sequelize: sequelize,
         timestamps: false
     })

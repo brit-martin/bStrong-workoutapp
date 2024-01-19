@@ -1,4 +1,4 @@
-import Exercise from './Exercise.jsx'
+import Program from './components/Program'
 import { useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css'
@@ -20,7 +20,7 @@ function App() {
     .catch((error) => {
       console.log(error)
     })
-  })
+  },[])
 
   const weeks = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']
 
@@ -30,11 +30,14 @@ function App() {
      <h1>Workouts of the Week</h1>
             <div>
               {programObjs.map((element, index) => {
-                return <div key={element.id}>
+                return <div key={element.programId}>
+                  {/* {console.log(element)} */}
                         <h2>{weeks[index]}</h2>  
                         <h5>{element.name}</h5>
                         <button onClick={() => setDisplayedProgramId(element.programId)}>Exercises</button>
-                        {displayedProgramId === (element.programId) && <Exercise displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}/>}
+                        {displayedProgramId === (element.programId) && 
+                          <Program displayedProgramId = {displayedProgramId} setDisplayedProgramId = {setDisplayedProgramId}
+                        />}
                   </div>
               })
             }

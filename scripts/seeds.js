@@ -349,27 +349,27 @@ const schedules = [
     },
 ]
 
-const goals = [
+// const goals = [
 
-    {
-        goal: '10 reps',
-        userId: 1,
-        scheduleId: 1,
-        exerciseId: 1,
-    },
-    {
-        goal: '8 reps',
-        userId: 1,
-        scheduleId: 1,
-        exerciseId: 2,
-    },
-    {
-        goal: '6 reps',
-        userId: 1,
-        scheduleId: 2,
-        exerciseId: 3,
-    }
-]
+//     {
+//         goal: '10 reps',
+//         userId: 1,
+//         scheduleId: 1,
+//         exerciseId: 1,
+//     },
+//     {
+//         goal: '8 reps',
+//         userId: 1,
+//         scheduleId: 1,
+//         exerciseId: 2,
+//     },
+//     {
+//         goal: '6 reps',
+//         userId: 1,
+//         scheduleId: 2,
+//         exerciseId: 3,
+//     }
+// ]
 
 
 await sequelize.sync({ force: true })
@@ -472,8 +472,8 @@ for (let i=0; i < ChestAndShouldersExercises.length && i < 7; i++){
     await ChestAndShouldersExercises[i].addProgram(ChestAndShouldersProgram)
 }
 
-await Goal.bulkCreate(goals)
+// await Goal.bulkCreate(goals)
 
-console.log(newSchedules)
+// console.log(newSchedules)
 
 await sequelize.close()

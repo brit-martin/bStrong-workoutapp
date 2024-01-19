@@ -70,7 +70,7 @@ app.post('/new-rep', async (req, res) => {
 
 app.put('/favorite-regimen', async (req, res) => {
     let favExerciseId = req.query.id
-    console.log(favExerciseId)
+    // console.log(favExerciseId)
     let favoriteProgramObj = await Program.findOne({
         where: { id: favExerciseId }
     })
