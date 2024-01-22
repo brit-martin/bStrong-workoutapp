@@ -1,31 +1,38 @@
 import React, { useState } from 'react'
+import axios from 'axios'
 import { Button } from 'react-bootstrap'
+import './exercise.css'
 
-export default function Exercise({element, props}) {
+export default function Exercise({element}) {
     let [repInput, setRepInput] = useState('')
 
-    function SaveButton(){
-        alert('button was clicked')
-        let body ={
-            goal: repInput,
-            scheduleId: element.scheduleId,
-            exerciseId: element.exerciseId,
-            userId: element.userId,
+    // let element = props.element
+    // console.log(element)
 
+    function SaveButton(){
+        
+        let body = {
+            goal: repInput,
+            userId: 1,
+            exerciseId: element.exerciseId,
+            scheduleId: element.scheduleId,
         }
+
+        console.log(body)
+        
         axios.post('/new-rep', body)
         .then ((response) => {
-            props.setRepInput(response.data.value)
+            setRepInput(response.data)
             setRepInput('')
         })
         .catch ((error) => {
             console.log(error)
         })
     }
+    
 
-    console.log(element)
   return (
-    <div key={element.ExercisePrograms.exerciseId}>
+    <div key={element.exerciseId}>
         <h3 >{element.name}</h3>
         <p>Goal: {element.reps}</p>
         <label>Reps:</label> 
@@ -35,7 +42,7 @@ export default function Exercise({element, props}) {
             className='repInput'
             onChange={(event) => setRepInput(event.target.value)}
         />
-            <Button className='btn' onClick={SaveButton}>Save</Button>
+        <Button className='btn' onClick={SaveButton}>Save</Button>
         <p>Sets: {element.sets}</p>
         
     </div>       

@@ -9,16 +9,44 @@ app.use(express.json())
 
 app.get('/workout', async (req, res) => {
     let programId = +req.query.programId
+    let date = req.query.date
 
     let program = await Program.findOne({
         where: { id: programId },
     })
 
+    let scheduleDate = await Schedule.findOne({
+        where: { date: date },
+    })
+
+    // console.log(scheduleDate)
     // console.log(program)
+
     let programRegimen = await program.getExercises({
         attributes: ["name", "reps", "sets"]
+        
     })
-    res.status(200).send(programRegimen)
+    let programDateArray = [];
+    for (let i=0; i < programRegimen.length; i++){
+        let programDateObj = {}
+        let programObj = programRegimen[i]
+    //     console.log(programObj)
+    
+    console.log(programRegimen)
+        
+        programDateObj.scheduleId = scheduleDate.id
+        programDateObj.name = programObj.name
+        programDateObj.reps = programObj.reps
+        programDateObj.sets = programObj.sets
+        programDateObj.programId = programObj.ExercisePrograms.programId
+        programDateObj.exerciseId = programObj.ExercisePrograms.exerciseId
+
+        programDateArray.push(programDateObj)
+        
+        // console.log(programDateArray)
+
+    }
+    res.status(200).send(programDateArray)
 
 })
 
@@ -68,6 +96,8 @@ app.post('/new-rep', async (req, res) => {
     res.status(200).send(newGoalDbObject)
 })
 
+
+
 app.put('/favorite-regimen', async (req, res) => {
     let favExerciseId = req.query.id
     // console.log(favExerciseId)
@@ -81,7 +111,7 @@ app.put('/favorite-regimen', async (req, res) => {
 
 
 
-app.delete('/delete-rep', async (req, res) => {
+app.delete('/reset-rep', async (req, res) => {
     let scheduleId = req.query.scheduleId
     console.log(scheduleId)
     let deleteScheduleId = await Goal.destroy ({

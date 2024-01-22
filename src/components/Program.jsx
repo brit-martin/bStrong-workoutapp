@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-// import './exercise.css'
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios'
 import Exercise from './Exercise.jsx'
@@ -9,9 +8,10 @@ export default function Program(props){
     let { setDisplayedProgramId } = props
     let [show, setShow] = useState(true);
     let [exercises, setExercises] = useState([])
+    let [favorited, setFavorited] = useState(false)
 
     useEffect(() => {
-        axios.get(`/workout?programId=${props.displayedProgramId}`)
+        axios.get(`/workout?programId=${props.displayedProgramId}&date=${props.date}`)
         .then((response) => {
             setExercises(response.data)
             console.log(response.data)
@@ -24,7 +24,9 @@ export default function Program(props){
         alert('workout favorited')
         axios.put(`/favorite-regimen?id=${props.displayedProgramId}`)
         .then((response) => {
-            console.log(response.data)
+            setFavorited(response.data)
+
+            console.log(setFavorited)
         })
         .catch((error)=>{
             console.log(error)
@@ -32,8 +34,16 @@ export default function Program(props){
         
     }
 
-   
+
     function ResetRepsButton(){
+        axios.delete(`/reset-rep?programId=${props.displayedProgramId}`)
+        .then((response)=>{
+
+
+        })
+        .catch ((error) => {
+            console.log(error)
+        })
 
     }
 
@@ -54,9 +64,11 @@ export default function Program(props){
                 <div>
                     {exercises.map((element) => {
                         return <Exercise 
-                            key={element.ExercisePrograms.exerciseId}
+                                key={element.exerciseId}
                                 element={element}
+                                
                             />
+                            
                         })
                     }           
                 </div>

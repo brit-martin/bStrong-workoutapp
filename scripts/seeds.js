@@ -294,22 +294,27 @@ const users = [
 const programs = [
     {
         name: 'Glutes & Quads',
+        image: 'https://images.unsplash.com/photo-1558611848-73f7eb4001a1?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8dGhlJTIwZ3ltfGVufDB8fDB8fHww',
         isFav: false,
     },
     {
         name: 'Back & Biceps',
+        image: 'https://img.freepik.com/premium-photo/equipment-gym_946657-140.jpg',
         isFav: false,
     },
     {
         name: 'Abs & Cardio',
+        image: "https://png.pngtree.com/background/20230610/original/pngtree-gym-treadmills-are-lined-in-an-empty-gym-picture-image_3036059.jpg",
         isFav: false,
     },
     {
         name: 'Glutes & Hamstrings',
+        image: 'https://static.vecteezy.com/system/resources/previews/021/488/003/large_2x/metal-dumbbells-with-background-blurred-gym-interior-free-photo.jpg',
         isFav: false,
     },
     {
         name: 'Chest & Triceps',
+        image: 'https://m.media-amazon.com/images/I/715ycaYpZ2L._AC_UF894,1000_QL80_.jpg',
         isFav: false,
     },
     {
