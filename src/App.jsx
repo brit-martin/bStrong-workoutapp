@@ -44,6 +44,8 @@ function App() {
                             displayedProgramId={displayedProgramId}
                             setDisplayedProgramId={setDisplayedProgramId}
                             date={element.date}
+                            isFav = {element.isFav}
+                            setProgramObjs = {setProgramObjs}
                           />
                         }
                   </div>

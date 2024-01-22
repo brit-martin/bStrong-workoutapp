@@ -32,7 +32,7 @@ app.get('/workout', async (req, res) => {
         let programObj = programRegimen[i]
     //     console.log(programObj)
     
-    console.log(programRegimen)
+    // console.log(programRegimen)
         
         programDateObj.scheduleId = scheduleDate.id
         programDateObj.name = programObj.name
@@ -73,11 +73,12 @@ app.get('/this-weeks-program', async (req, res) => {
         // console.log(scheduleObj)
        
         let theProgram = await scheduleObj.getProgram()      
-        // console.log(theProgram) 
+        console.log(theProgram) 
       
         oneDateNameObj.date = thisWeeksSchedules[i].date
         oneDateNameObj.name = theProgram.name
         oneDateNameObj.programId = theProgram.id
+        oneDateNameObj.isFav = theProgram.isFav
         dateNameObjs.push(oneDateNameObj)
     }  
   res.status(200).send(dateNameObjs) 
@@ -91,7 +92,7 @@ app.post('/new-rep', async (req, res) => {
     let exerciseId = req.body.exerciseId
     let userId = req.body.userId
 
-    let newGoalDbObject = await Goal.create({ goal: newGoal, user_id: userId, exercise_id: exerciseId, schedule_id: scheduleId})
+    let newGoalDbObject = await Goal.create({ goal: newGoal, userId: userId, exerciseId: exerciseId, scheduleId: scheduleId})
 
     res.status(200).send(newGoalDbObject)
 })
@@ -100,11 +101,15 @@ app.post('/new-rep', async (req, res) => {
 
 app.put('/favorite-regimen', async (req, res) => {
     let favExerciseId = req.query.id
-    // console.log(favExerciseId)
+    
+    console.log(favExerciseId)
+
     let favoriteProgramObj = await Program.findOne({
         where: { id: favExerciseId }
     })
-    let updatedFavTable = await favoriteProgramObj.update({isFav: "true"})
+    let updatedFavTable = await favoriteProgramObj.update({isFav: !favoriteProgramObj.isFav})
+
+
 
     res.status(200).send(updatedFavTable)
 })
