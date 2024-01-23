@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import {Button, Modal} from 'react-bootstrap';
 import axios from 'axios'
 import Exercise from './Exercise.jsx'
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import './program.css'
 
 export default function Program(props){
 
@@ -85,7 +87,9 @@ export default function Program(props){
                 <Button onClick={ResetRepsButton}>Reset</Button>
                 {props.isFav?
                     <Button onClick={FavoriteButton}>Unfavorite</Button>:  
-                    <Button onClick={FavoriteButton}>Favorite</Button>
+                    <Button>
+                    <i className="bi bi-suit-heart-fill" style={{ fontSize: '1.25rem', color: '#D9E5D6' }} onClick={FavoriteButton}></i>
+                    </Button>
                 }
             </Modal.Footer>
 
