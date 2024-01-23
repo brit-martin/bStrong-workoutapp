@@ -3,7 +3,8 @@ import { useState, useEffect} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './app.css'
 import axios from 'axios'
-
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 
 function App() {
@@ -33,14 +34,15 @@ function App() {
      <img src='https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small_2x/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg' alt="Gym Image"/>
             <div>
               {programObjs.map((element, index) => {
-                return <div key={element.programId}>
-                  {/* {console.log(element)} */}
-                        <h2>{weeks[index]}</h2>  
-                        <h5>{element.name}</h5>
-                        {/* <image{element.image}/> */}
-                        <button onClick={() => setDisplayedProgramId(element.programId)}>Exercises</button>
+                return <Card className="card" style={{ width: '22rem'}} key={element.programId}>
+                        <Card.Img variant='top'className="program-image" src={element.image} />
+                        <Card.Body>
+                        <Card.Title>{weeks[index]}</Card.Title>
+                        <Card.Text>{element.name}</Card.Text>
+                        <Button variant="primary" onClick={() => setDisplayedProgramId(element.programId)}>Exercises</Button>
                         {displayedProgramId === (element.programId) && 
-                          <Program
+                         
+                         <Program
                             displayedProgramId={displayedProgramId}
                             setDisplayedProgramId={setDisplayedProgramId}
                             date={element.date}
@@ -48,7 +50,8 @@ function App() {
                             setProgramObjs = {setProgramObjs}
                           />
                         }
-                  </div>
+                        </Card.Body>
+                  </Card>
               })
             }
             </div>    

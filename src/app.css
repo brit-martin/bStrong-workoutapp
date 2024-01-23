@@ -1,4 +1,12 @@
 body {
     background-color: #D9E5D6;  
 }
+.program-image {
+    width: 300px;
+    height: 200px;
+}
+.card {
+    display: flex;
+    flex-direction: column;
 
+}

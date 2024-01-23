@@ -27,9 +27,9 @@ Program.init(
             type: DataTypes.STRING(30),
             unique: true,
         },
-        // image: {
-        //     type: DataTypes.TEXT,
-        // },
+        image: {
+            type: DataTypes.TEXT,
+        },
         isFav: {
             type: DataTypes.BOOLEAN
         }
