@@ -18,7 +18,16 @@ Steps to implement my app---------------------
 3- created a seed folder that holds my table data
 4- made for loops in my seed folder that use sequelize queries to get all my data into my association table from the programs table and the exercise table.
 4- create end points that I need for my user
-5- 
+5- Used postman to test out those end points and made sure it was grabbing the informtation I needed.
+6- Ended up adding another componenet so I could have individual input fields. Otherwise they were all typing the same thing in all the inputs on the exercise modal page.
+7-Started the front end. Referred back to my postman to make sure I wrote the queries correctly.
+8- Used useeffect to allow the exercise table to load when the button is clicked. 
+9- Mapped through all the programs and displayed the name of the exercise the goal, sets and added an input for them to type
+what they achieved.
+10- Changed the favorite button to a terinary. When its clicked it will toggle back and forth between favorited and unfavorite so the
+user knows if they liked the work out or not. Eventually I would like to add a favorite link/button that will pull up all the exercises 
+they favorited so if they want to do them again they have access to them.
+11-
 
 
 
@@ -26,5 +35,12 @@ TO DO:-----------------------
 get a basic component tree nailed down
 think of what end points I need
 think of queries I need to get my data from my tables
+Figure out how to add images to the programs
+make them into cards on bootstrap
+finish my delete end point
+add a heart icon to my favorite button
+style the page so its more pleasing for the user and easy to follow
+
+
 
 

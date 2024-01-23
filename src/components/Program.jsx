@@ -10,14 +10,15 @@ export default function Program(props){
     let [exercises, setExercises] = useState([])
 
 
-    useEffect(() => {
+    function getExercisePrograms(){
         axios.get(`/workout?programId=${props.displayedProgramId}&date=${props.date}`)
         .then((response) => {
-            setExercises(response.data)
-            // console.log(response.data)
-            
-        
+            setExercises(response.data)   
         })
+    }
+
+    useEffect(() => {
+        getExercisePrograms()
     }, [])
 
     function FavoriteButton(){
@@ -25,7 +26,6 @@ export default function Program(props){
         axios.put(`/favorite-regimen?id=${props.displayedProgramId}`)
         .then((response) => {
             console.log(response.data)   
-            // window.location.reload();
             axios.get('/this-weeks-program')
             .then((response) => {
                 props.setProgramObjs(response.data)
@@ -39,10 +39,13 @@ export default function Program(props){
 
 
     function ResetRepsButton(){
-        axios.delete(`/reset-rep?programId=${props.displayedProgramId}`)
+        
+        axios.delete(`/reset-rep?scheduleId=${props.displayedProgramId}`)
         .then((response)=>{
-
-
+            alert(response.data.message)
+            // getExercisePrograms()
+            // setShow(false);
+            setDisplayedProgramId(-1)
         })
         .catch ((error) => {
             console.log(error)
@@ -69,7 +72,7 @@ export default function Program(props){
                         return <Exercise 
                                 key={element.exerciseId}
                                 element={element}
-                                
+                                exercises={exercises}
                             />
                             
                         })

@@ -12,29 +12,45 @@ app.get('/workout', async (req, res) => {
     let date = req.query.date
 
     let program = await Program.findOne({
-        where: { id: programId },
+        where: { id: programId }
     })
 
     let scheduleDate = await Schedule.findOne({
         where: { date: date },
+        include: {
+            model: Goal,
+        }
     })
 
-    // console.log(scheduleDate)
+    console.log(scheduleDate)
     // console.log(program)
 
     let programRegimen = await program.getExercises({
-        attributes: ["name", "reps", "sets"]
-        
+        attributes: ["name", "reps", "sets"],
     })
+
+    // console.log(programRegimen)
     let programDateArray = [];
     for (let i=0; i < programRegimen.length; i++){
         let programDateObj = {}
         let programObj = programRegimen[i]
-    //     console.log(programObj)
+        // console.log(programObj)
     
     // console.log(programRegimen)
+
+        let goalNum = "";
+
+        // console.log(programObj.ExercisePrograms.exerciseId)
+        scheduleDate.goals.forEach((goalObj) => {
+            if(+goalObj.exerciseId === programObj.ExercisePrograms.exerciseId){
+                goalNum = goalObj.goal;
+                return 
+            }
+        });
+        console.log(goalNum)
         
         programDateObj.scheduleId = scheduleDate.id
+        programDateObj.goal = goalNum;
         programDateObj.name = programObj.name
         programDateObj.reps = programObj.reps
         programDateObj.sets = programObj.sets
@@ -73,12 +89,14 @@ app.get('/this-weeks-program', async (req, res) => {
         // console.log(scheduleObj)
        
         let theProgram = await scheduleObj.getProgram()      
-        console.log(theProgram) 
+        // console.log(theProgram) 
       
         oneDateNameObj.date = thisWeeksSchedules[i].date
         oneDateNameObj.name = theProgram.name
         oneDateNameObj.programId = theProgram.id
+        oneDateNameObj.image = theProgram.image
         oneDateNameObj.isFav = theProgram.isFav
+
         dateNameObjs.push(oneDateNameObj)
     }  
   res.status(200).send(dateNameObjs) 
@@ -92,7 +110,19 @@ app.post('/new-rep', async (req, res) => {
     let exerciseId = req.body.exerciseId
     let userId = req.body.userId
 
-    let newGoalDbObject = await Goal.create({ goal: newGoal, userId: userId, exerciseId: exerciseId, scheduleId: scheduleId})
+    let newGoalDbObject = await Goal.findOrCreate({ 
+        where: {exerciseId},
+        defaults: {
+            goal: newGoal, userId: userId, exerciseId: exerciseId, scheduleId: scheduleId
+        }
+    });
+
+    console.log(newGoalDbObject)
+    if(!newGoalDbObject[1]){
+        await Goal.update({goal: newGoal},{
+            where: {exerciseId}
+        })
+    }
 
     res.status(200).send(newGoalDbObject)
 })
@@ -102,7 +132,7 @@ app.post('/new-rep', async (req, res) => {
 app.put('/favorite-regimen', async (req, res) => {
     let favExerciseId = req.query.id
     
-    console.log(favExerciseId)
+    // console.log(favExerciseId)
 
     let favoriteProgramObj = await Program.findOne({
         where: { id: favExerciseId }
@@ -118,12 +148,14 @@ app.put('/favorite-regimen', async (req, res) => {
 
 app.delete('/reset-rep', async (req, res) => {
     let scheduleId = req.query.scheduleId
-    console.log(scheduleId)
-    let deleteScheduleId = await Goal.destroy ({
-        where: { schedule_id: scheduleId}
+
+    await Goal.destroy({
+        where: {scheduleId: scheduleId}
+    });
+
+    res.status(200).send({
+        message: "goals were reset"
     })
-    res.status(200).send(deleteScheduleId)
-    console.log(deleteScheduleId)
 
 })
 

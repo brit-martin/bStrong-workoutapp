@@ -3,8 +3,8 @@ import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import './exercise.css'
 
-export default function Exercise({element}) {
-    let [repInput, setRepInput] = useState('')
+export default function Exercise({element, exercises}) {
+    let [repInput, setRepInput] = useState(element.goal)
 
     // let element = props.element
     // console.log(element)
@@ -22,15 +22,16 @@ export default function Exercise({element}) {
         
         axios.post('/new-rep', body)
         .then ((response) => {
-            setRepInput(response.data)
-            setRepInput('')
+            setRepInput(response.data.goal)
+            alert("Rep goal saved")
         })
         .catch ((error) => {
             console.log(error)
         })
     }
     
-
+//this displays the individual exercises by maping through its parent(program.jsx)and displaying all the 
+//exercises with the corresponding program Id
   return (
     <div key={element.exerciseId}>
         <h3 >{element.name}</h3>
@@ -43,6 +44,8 @@ export default function Exercise({element}) {
             onChange={(event) => setRepInput(event.target.value)}
         />
         <Button className='btn' onClick={SaveButton}>Save</Button>
+
+
         <p>Sets: {element.sets}</p>
         
     </div>       
