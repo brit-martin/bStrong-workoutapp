@@ -1,12 +1,52 @@
 body {
     background-color: #D9E5D6;  
+    /* display: flex;
+    flex-direction: row; */
 }
 .program-image {
-    width: 300px;
-    height: 200px;
+    width: 225px;
+    height: 150px;
+    max-width: 90%;
+}
+.homepage-image {
+    max-width: 1000px;
+    height: 350px;
+    object-position: 70% 15%;
 }
 .card {
     display: flex;
     flex-direction: column;
-
+    justify-content: center;
+    align-items: center;
+    background-color: #FAF9F6;
+    padding: 10px 0px 0px 0px;
+    height: 300px;
 }
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.app {
+    display: flex;
+    flex-direction: column;
+}
+.workout-cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.heading-title {
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
