@@ -31,7 +31,9 @@ function App() {
    
      <div className="app">
      <h1 className="heading-title">Workouts of the Week</h1>
+     <button className="see-all-favorited-button">Favorited</button>
      <img className="homepage-image"src='https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small_2x/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg' alt="Gym Image"/>
+           
             <div className= "workout-cards">
               {programObjs.map((element, index) => {
                 return <Card className="card" style={{ width: '18rem'}} key={element.programId}>
@@ -56,6 +58,10 @@ function App() {
               })
             }
             </div>    
+            
+              
+              
+           
     </div>
   )
 }

@@ -6,7 +6,8 @@ import {Op} from 'sequelize'
 const app = express()
 
 app.use(express.json())
-
+// this loads when you click on the exercises button and sends scheduleId, goal, name
+// reps, sets, programId, and exerciseId to the front end.
 app.get('/workout', async (req, res) => {
     let programId = +req.query.programId
     let date = req.query.date
@@ -66,7 +67,8 @@ app.get('/workout', async (req, res) => {
 
 })
 
-
+//this loads all the programs when you are on the home page
+//this sends the date, name of exercise, programId, program image, isFav
 app.get('/this-weeks-program', async (req, res) => {
     
     let datesOfThisWeek = [
@@ -103,7 +105,8 @@ app.get('/this-weeks-program', async (req, res) => {
 
 })
 
-
+//this changes the goal column to the input the user put in
+//this sends back the goal table with the updated goal, userId, exerciseId, and the scheduleId
 app.post('/new-rep', async (req, res) => {
     let newGoal = req.body.goal
     let scheduleId = req.body.scheduleId
@@ -116,8 +119,7 @@ app.post('/new-rep', async (req, res) => {
             goal: newGoal, userId: userId, exerciseId: exerciseId, scheduleId: scheduleId
         }
     });
-
-    console.log(newGoalDbObject)
+    // console.log(newGoalDbObject)
     if(!newGoalDbObject[1]){
         await Goal.update({goal: newGoal},{
             where: {exerciseId}
@@ -128,7 +130,8 @@ app.post('/new-rep', async (req, res) => {
 })
 
 
-
+//this changes the isFav column from false to true when user clicks on the button
+//this sends the updated table to the front end with the id, name, isFave, and image
 app.put('/favorite-regimen', async (req, res) => {
     let favExerciseId = req.query.id
     
@@ -145,7 +148,9 @@ app.put('/favorite-regimen', async (req, res) => {
 })
 
 
-
+//this erases with the user clicks the reset button by destroy the goal column where the 
+//scheduleId matches with the scheduleId they clicked on
+//send back date, name, programId, and image
 app.delete('/reset-rep', async (req, res) => {
     let scheduleId = req.query.scheduleId
 
@@ -159,7 +164,14 @@ app.delete('/reset-rep', async (req, res) => {
 
 })
 
+app.get('/get-favorited', async (req, res) => {
+    let favoriteBoolean = req.query.isFav
 
+    let favortieObj = await Program.findAll({
+        where: {isFav: favoriteBoolean}
+    })
+    res.status(200).send(favortieObj)
+})
 
 ViteExpress.listen(app, 8080, () => {
     console.log('Server is up on 8080')

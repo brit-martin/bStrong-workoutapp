@@ -89,7 +89,7 @@ export default function Program(props){
                 {props.isFav?
                     <Button onClick={FavoriteButton}>Unfavorite</Button>:  
                     <Button>
-                    <i className="bi bi-suit-heart-fill" style={{ fontSize: '1.25rem', color: '#D9E5D6' }} onClick={FavoriteButton}></i>
+                    <i className="bi bi-suit-heart-fill" style={{ fontSize: '1.25rem', color: '#D05353' }} onClick={FavoriteButton}></i>
                     </Button>
                 }
             </Modal.Footer>
