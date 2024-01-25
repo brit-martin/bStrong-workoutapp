@@ -6,7 +6,7 @@ import Program from "./Program";
 
 const weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 
-export default function CardGroup({programObjs, setProgramObjs}) {
+export default function CardGroup({programObjs, setProgramObjs, show}) {
 
   let [displayedProgramId, setDisplayedProgramId] = useState(-1);
 
@@ -25,7 +25,7 @@ export default function CardGroup({programObjs, setProgramObjs}) {
               src={element.image}
             />
             <Card.Body>
-              <Card.Title className="card-content">{weeks[index]}</Card.Title>
+             {!show && <Card.Title className="card-content">{weeks[index]}</Card.Title>}
               <Card.Text className="card-content">
                 {element.name}
                 <Button

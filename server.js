@@ -101,6 +101,9 @@ app.get('/this-weeks-program', async (req, res) => {
 
         dateNameObjs.push(oneDateNameObj)
     }  
+
+    console.log(dateNameObjs)
+
   res.status(200).send(dateNameObjs) 
 
 })
@@ -167,10 +170,58 @@ app.delete('/reset-rep', async (req, res) => {
 app.get('/get-favorited', async (req, res) => {
     let favoriteBoolean = req.query.isFav
 
-    let favortieObj = await Program.findAll({
+    //getting all the Program rows that are favorited
+    let favoritePrograms = await Program.findAll({
         where: {isFav: favoriteBoolean}
     })
-    res.status(200).send(favortieObj)
+
+    //we want to find the most recent Schedule associated with each Program
+    //let's make an array to hold those
+    let mostRecentFavoriteSchedules = []
+
+    //looping through through all the favorite Programs
+    for (let i = 0; i < favoritePrograms.length; i++) {
+        //for every favorite Program, we need to find
+        //the most recent schedule associated with it
+
+        //TODO: this simply grabs the first Schedule the DB gives us, but it should
+        //      actually grab the most recent (by date), which isn't working yet
+        //      this will do for now...
+        let firstSchedule = (await favoritePrograms[i].getSchedules(null, {order: [['date', 'ASC']]}))[0]
+
+        //if firstSchedule was able to be found (if it isn't undefined)
+        if (firstSchedule) {
+            //then push it into our collection of "most recent Schedules" associated with our favorited Programs
+            mostRecentFavoriteSchedules.push(firstSchedule)
+        }
+    }
+
+    //now that we are done looping, mostRecentFavoriteSchedules is all of the most recent schedules that are associated
+    //with a liked Program
+
+    //now we are going to go backwards and get the Programs again from these schedules,
+    //and combine the Program and Schedule data into objects in dateNameObjs (similar how we did in '/this-weeks-program' endpoint)
+
+    let dateNameObjs = []
+    for(let i =0; i < mostRecentFavoriteSchedules.length; i++){
+        let oneDateNameObj = {}
+        let scheduleObj = mostRecentFavoriteSchedules[i]
+        // console.log(scheduleObj)
+       
+        let theProgram = await scheduleObj.getProgram()    
+        // console.log(theProgram) 
+      
+        oneDateNameObj.date = mostRecentFavoriteSchedules[i].date
+        oneDateNameObj.name = theProgram.name
+        oneDateNameObj.programId = theProgram.id
+        oneDateNameObj.image = theProgram.image
+        oneDateNameObj.isFav = theProgram.isFav
+
+        dateNameObjs.push(oneDateNameObj)
+    }  
+
+    console.log(dateNameObjs)
+    res.status(200).send(dateNameObjs)
 })
 
 ViteExpress.listen(app, 8080, () => {

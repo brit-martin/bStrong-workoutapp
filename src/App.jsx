@@ -5,6 +5,7 @@ import "./app.css";
 import axios from "axios";
 import CardGroup from "./components/CardGroup";
 import Modal from "react-bootstrap/Modal";
+import Button from 'react-bootstrap/Button';
 
 
 export default function App() {
@@ -45,12 +46,12 @@ export default function App() {
   return (
     <div className="app">
       <h1 className="heading-title">Workouts of the Week</h1>
-      <button
+      <Button
         className="see-all-favorited-button"
         onClick={getFavoritedPrograms}
       >
         Favorited
-      </button>
+      </Button>
 
       <img
         className="homepage-image"
@@ -71,7 +72,7 @@ export default function App() {
             centered
           >
             <Modal.Header closeButton onHide={() => setShow(false)}>
-            <Modal.Title>Favorited Programs</Modal.Title>
+            <Modal.Title>Favorite Programs</Modal.Title>
             </Modal.Header>
 
             <Modal.Body>
@@ -79,6 +80,7 @@ export default function App() {
                 <CardGroup
                 programObjs={favoriteObj}
                 setProgramObjs={setFavoriteObj}
+                show= {show}
              />
               </div>
             </Modal.Body> 

@@ -13,6 +13,7 @@ export default function Program(props){
 
 
     function getExercisePrograms(){
+        console.log(`/workout?programId=${props.displayedProgramId}&date=${props.date}`)
         axios.get(`/workout?programId=${props.displayedProgramId}&date=${props.date}`)
         .then((response) => {
             setExercises(response.data)   
