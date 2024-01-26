@@ -2,3 +2,6 @@
     background-color: black;
     border: black;
 }
+.btn:hover {
+    background-color: #0892A5;
+}

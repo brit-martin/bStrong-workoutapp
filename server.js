@@ -48,7 +48,7 @@ app.get('/workout', async (req, res) => {
                 return 
             }
         });
-        console.log(goalNum)
+        // console.log(goalNum)
         
         programDateObj.scheduleId = scheduleDate.id
         programDateObj.goal = goalNum;
@@ -102,7 +102,7 @@ app.get('/this-weeks-program', async (req, res) => {
         dateNameObjs.push(oneDateNameObj)
     }  
 
-    console.log(dateNameObjs)
+    // console.log(dateNameObjs)
 
   res.status(200).send(dateNameObjs) 
 
@@ -220,7 +220,7 @@ app.get('/get-favorited', async (req, res) => {
         dateNameObjs.push(oneDateNameObj)
     }  
 
-    console.log(dateNameObjs)
+    // console.log(dateNameObjs)
     res.status(200).send(dateNameObjs)
 })
 

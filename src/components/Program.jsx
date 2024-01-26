@@ -13,11 +13,11 @@ export default function Program(props){
 
 
     function getExercisePrograms(){
-        console.log(`/workout?programId=${props.displayedProgramId}&date=${props.date}`)
+        // console.log(`/workout?programId=${props.displayedProgramId}&date=${props.date}`)
         axios.get(`/workout?programId=${props.displayedProgramId}&date=${props.date}`)
         .then((response) => {
             setExercises(response.data)   
-            console.log(response.data)
+            // console.log(response.data)
         })
     }
 
@@ -60,7 +60,7 @@ export default function Program(props){
     return (
         <>
         <Modal 
-        size="lg"
+        size="md"
         show={show}
         aria-labelledby="contained-modal-title-vcenter"
         centered
@@ -88,7 +88,8 @@ export default function Program(props){
             <Modal.Footer>
                 <Button onClick={ResetRepsButton}>Reset</Button>
                 {props.isFav?
-                    <Button onClick={FavoriteButton}>Unfavorite</Button>:  
+                    <Button onClick={FavoriteButton}>Unfavorite
+                    </Button>:  
                     <Button>
                     <i className="bi bi-suit-heart-fill" style={{ fontSize: '1.25rem', color: '#D05353' }} onClick={FavoriteButton}></i>
                     </Button>

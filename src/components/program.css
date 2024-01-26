@@ -1,5 +1,5 @@
 
-.btn-info, .btn-info:hover, .btn-info:active, .btn-info:visited {
+.btn-info {
     background-color: black;
     border-radius: 10px;
     border: 1px solid transparent;
@@ -9,4 +9,7 @@
     font-family: inherit;
     cursor: pointer;
     transition: border-color 0.25s;
+}
+.btn:active {
+    background-color: #0892A5;
 }
