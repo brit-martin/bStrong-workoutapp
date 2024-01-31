@@ -48,6 +48,16 @@ export default function App() {
   }
   // console.log(setFavoriteObj)
 
+  function logoutButton(event){
+    event.preventDefault()
+
+    axios.post('/logout')
+    .then((response) => {
+        console.log(response.data)
+    })
+
+}
+
   return (
     <>
     <Login/> 
@@ -64,6 +74,8 @@ export default function App() {
             Favorited
           </Button>
         </Col>
+        <Col>
+        <Button onClick={logoutButton}>Logout</Button></Col>
       </Row>
       <br></br>
       <Row>

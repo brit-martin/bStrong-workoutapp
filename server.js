@@ -244,7 +244,8 @@ app.post('/login', async (req, res) => {
     const user = await User.findOne({ where: { email: email }})
 
     if (user && user.password === password) {
-        req.session.userId = user.userId; //makes session (aka cookie aka session id number)
+        req.session.userId = user.id; //makes session (aka cookie aka session id number)
+        console.log(user.id)
         res.send({sucess: true})
     } else {
         res.send({ success: false })
@@ -254,6 +255,28 @@ app.post('/login', async (req, res) => {
 app.post('/logout',loginRequired, async (req, res) => {
     req.session.destroy()
     res.send({success: true})
+})
+
+app.post('/signup', async (req, res) => {
+    const {email, password, fname, lname} = req.body
+    if (!email || !password || !fname || !lname){
+        res.send('All fields are required to sign up')
+        return
+    }
+    const alreadyUser = await User.findOne({where: {email: email}})
+        if (!alreadyUser){
+            let newUser = await User.create({
+                email: email,
+                password: password,
+                fname: fname,
+                lname: lname,
+            })
+            console.log(newUser)
+            req.session.userId = newUser.id;
+            res.send('Signed Up Sucessfully')
+        } else {
+            res.send('User already Exists')
+        }
 })
 
 ViteExpress.listen(app, 8080, () => {
