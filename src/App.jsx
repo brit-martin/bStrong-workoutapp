@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Login from './components/Login';
 
 
 
@@ -48,10 +49,12 @@ export default function App() {
   // console.log(setFavoriteObj)
 
   return (
+    <>
+    <Login/> 
     <Container fluid>
       <Row className="justify-content-md-center">
         <Col xs='2'>
-          <img style={{maxHeight: "85px"}} src={`../images/workoutlogo.png`} alt="workoutlogo"/>
+          <img style={{maxHeight: "90px"}} src={`../images/workoutlogo.png`} alt="workoutlogo"/>
         </Col>
         <Col xs='8'>  
           <h1 className="heading-title">Train. Tone. Transform.</h1>
@@ -104,5 +107,6 @@ export default function App() {
           </div>
         </Row>
     </Container>
+    </>
   );
 }

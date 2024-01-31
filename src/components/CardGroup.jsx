@@ -2,7 +2,6 @@ import { useState } from 'react'
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Program from "./Program";
-import { Col } from 'react-bootstrap';
 
 const weeks = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
 

@@ -2,13 +2,28 @@ import express from 'express'
 import ViteExpress from 'vite-express'
 import { Exercise, Program, Schedule, Goal, User } from './models/model.js'
 import {Op} from 'sequelize'
+import session from 'express-session'
 
 const app = express()
-
 app.use(express.json())
+app.use(express.urlencoded({extended: false}))
+app.use(session({secret: 'woorrrkkkk', saveUninitialized: true, resave: false }))
+
+//middleware function that checks if the user is logged in.
+function loginRequired(req, res, next){
+    console.log(req.session)
+    if (!req.session.userId) {
+        res.status(401).json({error: 'Unauthorized'})
+    } else {
+        next();
+    }
+}
+
+
+
 // this loads when you click on the exercises button and sends scheduleId, goal, name
 // reps, sets, programId, and exerciseId to the front end.
-app.get('/workout', async (req, res) => {
+app.get('/workout', loginRequired, async (req, res) => {
     let programId = +req.query.programId
     let date = req.query.date
 
@@ -69,7 +84,7 @@ app.get('/workout', async (req, res) => {
 
 //this loads all the programs when you are on the home page
 //this sends the date, name of exercise, programId, program image, isFav
-app.get('/this-weeks-program', async (req, res) => {
+app.get('/this-weeks-program', loginRequired, async (req, res) => {
     
     let datesOfThisWeek = [
         '2024-01-01',
@@ -110,7 +125,7 @@ app.get('/this-weeks-program', async (req, res) => {
 
 //this changes the goal column to the input the user put in
 //this sends back the goal table with the updated goal, userId, exerciseId, and the scheduleId
-app.post('/new-rep', async (req, res) => {
+app.post('/new-rep', loginRequired, async (req, res) => {
     let newGoal = req.body.goal
     let scheduleId = req.body.scheduleId
     let exerciseId = req.body.exerciseId
@@ -135,7 +150,7 @@ app.post('/new-rep', async (req, res) => {
 
 //this changes the isFav column from false to true when user clicks on the button
 //this sends the updated table to the front end with the id, name, isFave, and image
-app.put('/favorite-regimen', async (req, res) => {
+app.put('/favorite-regimen', loginRequired, async (req, res) => {
     let favExerciseId = req.query.id
     
     // console.log(favExerciseId)
@@ -154,7 +169,7 @@ app.put('/favorite-regimen', async (req, res) => {
 //this erases with the user clicks the reset button by destroy the goal column where the 
 //scheduleId matches with the scheduleId they clicked on
 //send back date, name, programId, and image
-app.delete('/reset-rep', async (req, res) => {
+app.delete('/reset-rep', loginRequired, async (req, res) => {
     let scheduleId = req.query.scheduleId
 
     await Goal.destroy({
@@ -167,7 +182,7 @@ app.delete('/reset-rep', async (req, res) => {
 
 })
 
-app.get('/get-favorited', async (req, res) => {
+app.get('/get-favorited', loginRequired, async (req, res) => {
     let favoriteBoolean = req.query.isFav
 
     //getting all the Program rows that are favorited
@@ -222,6 +237,23 @@ app.get('/get-favorited', async (req, res) => {
 
     // console.log(dateNameObjs)
     res.status(200).send(dateNameObjs)
+})
+
+app.post('/login', async (req, res) => {
+    const { email, password } = req.body
+    const user = await User.findOne({ where: { email: email }})
+
+    if (user && user.password === password) {
+        req.session.userId = user.userId; //makes session (aka cookie aka session id number)
+        res.send({sucess: true})
+    } else {
+        res.send({ success: false })
+    }
+
+})
+app.post('/logout',loginRequired, async (req, res) => {
+    req.session.destroy()
+    res.send({success: true})
 })
 
 ViteExpress.listen(app, 8080, () => {

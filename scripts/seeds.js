@@ -287,7 +287,11 @@ const exercises = [
 
 const users = [
     {
-        name: 'Brittany Martin',
+        email: 'brittanylarson16@gmail.com',
+        password: "heyyy",
+        fname: 'Brittany',
+        lname: "Martin"
+
     }
 ]
 

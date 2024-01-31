@@ -10,6 +10,6 @@
     cursor: pointer;
     transition: border-color 0.25s;
 }
-.btn:active {
+/* .btn:active {
     background-color: #0892A5;
-}
+} */

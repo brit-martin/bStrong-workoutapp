@@ -136,9 +136,19 @@ User.init(
             autoIncrement: true,
             primaryKey: true
         },
-        name: {
+        email: {
             type: DataTypes.STRING,
-        }
+            unique: true
+        },
+        password: {
+            type: DataTypes.STRING
+        },
+        fname:{
+            type: DataTypes.STRING,
+        },
+        lname:{
+            type: DataTypes.STRING,
+        },
     },
     {
         modelName:'user',
