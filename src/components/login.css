@@ -1,0 +1,51 @@
+body {
+    display: flex;
+    flex-wrap: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+h3 {
+    font-family: "Rubik Mono One", monospace;
+    font-weight: 400;
+    font-style: normal;
+    
+}
+.signup {
+    padding: 4px;
+    width: 300px;
+}
+
+.signup-form {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 450px;
+}
+.signup-button {
+   margin: 10px;
+}
+.login-container {
+    padding: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+
+}
+.login {
+    padding: 4px;
+}
+.loginbtn {
+    margin: 6px;
+}
+.btn-container {
+    display: flex;
+}

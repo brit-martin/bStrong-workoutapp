@@ -286,13 +286,6 @@ const exercises = [
 ]
 
 const users = [
-    {
-        email: 'brittanylarson16@gmail.com',
-        password: "heyyy",
-        fname: 'Brittany',
-        lname: "Martin"
-
-    }
 ]
 
 const programs = [

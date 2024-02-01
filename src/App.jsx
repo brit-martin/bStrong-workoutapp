@@ -21,6 +21,8 @@ export default function App() {
 
   let [show, setShow] = useState(false);
 
+  const [refresh, setRefresh] = useState(false);
+
   // console.log(programObjs)
 
   useEffect(() => {
@@ -32,7 +34,7 @@ export default function App() {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
+  }, [refresh]);
 
   function getFavoritedPrograms() {
     axios.get(`/get-favorited?isFav=true`)
@@ -53,20 +55,23 @@ export default function App() {
 
     axios.post('/logout')
     .then((response) => {
-        console.log(response.data)
+        // console.log(response.data)
+        setProgramObjs([])
     })
 
 }
 
+// console.log(programObjs)
   return (
     <>
-    <Login/> 
+    {!programObjs[0] ? <Login setRefresh ={setRefresh} refresh= {refresh}/>:
+  
     <Container fluid>
       <Row className="justify-content-md-center">
         <Col xs='2'>
           <img style={{maxHeight: "90px"}} src={`../images/workoutlogo.png`} alt="workoutlogo"/>
         </Col>
-        <Col xs='8'>  
+        <Col xs='7'>  
           <h1 className="heading-title">Train. Tone. Transform.</h1>
         </Col>
         <Col>
@@ -75,7 +80,7 @@ export default function App() {
           </Button>
         </Col>
         <Col>
-        <Button onClick={logoutButton}>Logout</Button></Col>
+        <Button xs='2' onClick={logoutButton}>Logout</Button></Col>
       </Row>
       <br></br>
       <Row>
@@ -119,6 +124,7 @@ export default function App() {
           </div>
         </Row>
     </Container>
+    }
     </>
   );
 }

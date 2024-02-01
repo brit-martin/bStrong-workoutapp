@@ -12,13 +12,12 @@ export default function CardGroup({programObjs, setProgramObjs, show}) {
   return (
     <div className="workout-cards">
       {programObjs.map((element, index) => {
-       
         return (
-          <div>
+          <div key={element.programId}>
             <Card
               className="card"
               style={{ width: "16rem" }}
-              key={element.programId +""+ index}
+              
             >
               <Card.Img
                 variant="top"

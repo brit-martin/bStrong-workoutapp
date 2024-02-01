@@ -2,9 +2,14 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react"
 import React from 'react';
 import axios from "axios";
+import './login.css'
+import FloatingLabel from 'react-bootstrap/FloatingLabel'
+import Form from 'react-bootstrap/Form'
+import Container from 'react-bootstrap/Container'
 
 
 export default function Login(props){ 
+    const {setRefresh, refresh} = props
 
     const [emailValue, setEmailValue] = useState('')
     const [passwordValue, setPasswordValue] = useState('')
@@ -12,8 +17,9 @@ export default function Login(props){
     const [lastNameValue, setLastNameValue] = useState('')
     const [loginEmailValue, setLoginEmailValue] = useState('')
     const [loginPasswordValue, setLoginPasswordValue] = useState('')
+    const [showLogin, setShowLogin] = useState(false)
 
-    
+
     function signUpButton(event) {
         event.preventDefault()
 
@@ -27,6 +33,7 @@ export default function Login(props){
         axios.post('/signup', userBody)
         .then((response) => {
             console.log(response.data)
+            setRefresh(!refresh)
         })
         .catch((error) => {
             console.log(error)
@@ -36,9 +43,15 @@ export default function Login(props){
     function loginUserButton(event){
         event.preventDefault()
 
-        axios.post('/login', userBody)
+        let oneUserBody = {
+            email: loginEmailValue,
+            password: loginPasswordValue,
+        }
+
+        axios.post('/login', oneUserBody)
         .then((response) => {
             console.log(response.data)
+            setRefresh(!refresh)
         })
         .catch((error) => {
             console.log(error)
@@ -48,86 +61,105 @@ export default function Login(props){
 
     return(
         <>
-        <form onSubmit={signUpButton}>
+        {!showLogin ?
+        
+        <Form onSubmit={signUpButton} className="signup-form">
+            <img style={{maxHeight: "120px"}} src={`../images/workoutlogo.png`} alt="workoutlogo"/>
             <h3>Sign Up</h3>
 
-            <label htmlFor='fname'><b>First Name</b></label>
-            <input 
-                type="text" 
-                placeholder="First Name" 
-                name='fname' 
-                value={firstNameValue}
-                required
-                onChange={(e) => setFirstNameValue(e.target.value)}
-            ></input>
+            <FloatingLabel
+                controlid="floatingInput"
+                label="First Name"
+                className="signup"
+            >
+                <Form.Control 
+                    type="text" 
+                    placeholder="First Name" 
+                    value={firstNameValue} 
+                    onChange={(e) => setFirstNameValue(e.target.value)}
+                />
+            </FloatingLabel>
 
-            <label htmlFor='lname'><b>Last Name</b></label>
-            <input 
-                type="text" 
-                placeholder="Last Name" 
-                name='lname' 
-                value={lastNameValue}
-                required
-                onChange={(e) => setLastNameValue(e.target.value)}
-            ></input>
+            <FloatingLabel
+                controlid="floatingInput"
+                label="Last Name"
+                className="signup"
+            >
+                <Form.Control 
+                    type="text" 
+                    placeholder="Last Name" 
+                    value={lastNameValue} 
+                    onChange={(e) => setLastNameValue(e.target.value)}
+                />
+            </FloatingLabel>
 
-            <label htmlFor='email'><b>Email</b></label>
-            <input 
-                type="text" 
-                placeholder="Enter email" 
-                name='email' 
-                value={emailValue}
-                required
-                onChange={(e) => setEmailValue(e.target.value)}
-            ></input>
+            <FloatingLabel
+                controlid="floatingInput"
+                label="Email"
+                className="signup"
+            >
+                <Form.Control 
+                    type="text" 
+                    placeholder="Last Name" 
+                    value={emailValue} 
+                    onChange={(e) => setEmailValue(e.target.value)}
+                />
+            </FloatingLabel>
 
-            <label htmlFor='pword'><b>Password</b></label>
-            <input 
-                type="password" 
-                placeholder="Enter password" 
-                name="pword" 
-                value={passwordValue}
-                required
-                onChange={(e) => setPasswordValue(e.target.value)} 
-            ></input>
-
-            <Button type="submit">Sign Up</Button>
-            <span>Already registered <a href="#">login?</a></span>
-        </form>
-       
-
-        <form onSubmit={loginUserButton}>
-            <div className="login-container">
-                <label htmlFor="user-email"><b>Email</b></label>
-                <input
-                     type='text' 
-                     placeholder="Enter email" 
-                     name ="user-email" 
-                     value={loginEmailValue}
-                     required
-                     onChange={(e) => setLoginEmailValue(e.target.value)}>
-                </input>
-
-                <label htmlFor='password'><b>Password</b></label>
-                <input 
+            <FloatingLabel
+                controlid="floatingInput"
+                label="Password"
+                className="signup"
+            >
+                <Form.Control 
                     type="password" 
-                    placeholder="Enter Password" 
-                    name="password" 
-                    value={loginPasswordValue}
-                    required
-                    onChange={(e) => setLoginPasswordValue(e.target.value)}>
-                </input>
+                    placeholder="Password" 
+                    value={passwordValue} 
+                    onChange={(e) => setPasswordValue(e.target.value)}
+                />
+            </FloatingLabel>
 
-                <Button typeof="submit">Login</Button>
-            </div>
+            <Button className="signup-button" type="submit">Sign Up</Button>
+            <span>Already registered <a href="#" onClick={() => {setShowLogin(true)}}>login?</a></span>
+        </Form>
+       :
+        <Form onSubmit={loginUserButton} className="login-container">
+            <img style={{maxHeight: "120px"}} src={`../images/workoutlogo.png`} alt="workoutlogo"/>
+            <h3>Login</h3>
+            <FloatingLabel
+                controlid="floatingInput"
+                label="Email"
+                className="login"
+            >
+                <Form.Control 
+                    type="text" 
+                    placeholder="Email" 
+                    value={loginEmailValue} 
+                    onChange={(e) => setLoginEmailValue(e.target.value)}
+                />
+            </FloatingLabel>
 
-            <div className="login-container">
-                <Button className="cancelbtn">Cancel</Button>
-                {/* <span class='psw'>Forgot <a href="#">password?</a></span> */}
-            </div>
-        </form>
-        
-        </>
+            <FloatingLabel
+                controlid="floatingInput"
+                label="Password"
+                className="login"
+            >
+                <Form.Control 
+                    type="password" 
+                    placeholder="Password" 
+                    value={loginPasswordValue} 
+                    onChange={(e) => setLoginPasswordValue(e.target.value)}
+                />
+            </FloatingLabel>
+            <div className="btn-container">
+                <Button className='loginbtn' type="submit">Login</Button>
+                <Button className="loginbtn" onClick={() => {setShowLogin(false)}}>Cancel</Button>
+            </div>    
+        </Form>
+   
+        }   
+    </>
+      
     )
  
 }

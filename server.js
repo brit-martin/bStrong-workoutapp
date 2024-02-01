@@ -11,7 +11,7 @@ app.use(session({secret: 'woorrrkkkk', saveUninitialized: true, resave: false })
 
 //middleware function that checks if the user is logged in.
 function loginRequired(req, res, next){
-    console.log(req.session)
+    // console.log(req.session)
     if (!req.session.userId) {
         res.status(401).json({error: 'Unauthorized'})
     } else {
@@ -239,10 +239,14 @@ app.get('/get-favorited', loginRequired, async (req, res) => {
     res.status(200).send(dateNameObjs)
 })
 
+// app.get('/user-session', async (req, res) => {
+//     res.send(req.session.userId)
+// })
+
 app.post('/login', async (req, res) => {
     const { email, password } = req.body
     const user = await User.findOne({ where: { email: email }})
-
+        console.log(req.body)
     if (user && user.password === password) {
         req.session.userId = user.id; //makes session (aka cookie aka session id number)
         console.log(user.id)
@@ -252,6 +256,7 @@ app.post('/login', async (req, res) => {
     }
 
 })
+
 app.post('/logout',loginRequired, async (req, res) => {
     req.session.destroy()
     res.send({success: true})
@@ -271,7 +276,7 @@ app.post('/signup', async (req, res) => {
                 fname: fname,
                 lname: lname,
             })
-            console.log(newUser)
+            // console.log(newUser)
             req.session.userId = newUser.id;
             res.send('Signed Up Sucessfully')
         } else {

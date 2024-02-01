@@ -3,10 +3,9 @@ body {
     margin-bottom: 50px;
     background-color: #DCE0D9;   
     display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 10px; 
-}
-.see-all-favorited-button {
-    border-radius: 5px;
 }
 
 .program-image {
@@ -16,9 +15,8 @@ body {
 }
 .homepage-image {
     max-width: 90vw;
-    display: flex;
-
 }
+
 .card {
     display: flex;
     flex-direction: column;
@@ -47,11 +45,6 @@ body {
     justify-content: space-evenly;
     align-items: center;
 }
-/* .card-row{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
 
 .heading-title {
     font-family: "Rubik Mono One", monospace;
@@ -59,9 +52,5 @@ body {
     font-style: normal;
   }
 
-/* .card-container {
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-} */
+
 
