@@ -62,7 +62,8 @@ export default function Login(props){
     return(
         <>
         {!showLogin ?
-        
+        <div>
+        <div className="signup-wrapper"></div>
         <Form onSubmit={signUpButton} className="signup-form">
             <img style={{maxHeight: "120px"}} src={`../images/workoutlogo.png`} alt="workoutlogo"/>
             <h3>Sign Up</h3>
@@ -122,7 +123,10 @@ export default function Login(props){
             <Button className="signup-button" type="submit">Sign Up</Button>
             <span>Already registered <a href="#" onClick={() => {setShowLogin(true)}}>login?</a></span>
         </Form>
+        </div>
        :
+       <div>
+        <div className="login-wrapper"></div>
         <Form onSubmit={loginUserButton} className="login-container">
             <img style={{maxHeight: "120px"}} src={`../images/workoutlogo.png`} alt="workoutlogo"/>
             <h3>Login</h3>
@@ -156,7 +160,7 @@ export default function Login(props){
                 <Button className="loginbtn" onClick={() => {setShowLogin(false)}}>Cancel</Button>
             </div>    
         </Form>
-   
+        </div>
         }   
     </>
       

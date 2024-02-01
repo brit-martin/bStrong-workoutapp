@@ -23,6 +23,9 @@ export default function App() {
 
   const [refresh, setRefresh] = useState(false);
 
+  const body = document.querySelector("body")
+
+
   // console.log(programObjs)
 
   useEffect(() => {
@@ -30,6 +33,8 @@ export default function App() {
       .get("/this-weeks-program")
       .then((response) => {
         setProgramObjs(response.data);
+        // if(response.data) 
+        body.style.backgroundImage = "unset"
       })
       .catch((error) => {
         console.log(error);
@@ -57,6 +62,7 @@ export default function App() {
     .then((response) => {
         // console.log(response.data)
         setProgramObjs([])
+        body.style.backgroundImage = 'url("./images/wavebackground.png")'
     })
 
 }
