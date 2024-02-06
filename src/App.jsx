@@ -57,22 +57,27 @@ export default function App() {
 
   function logoutButton(event){
     event.preventDefault()
- 
-    axios.post('/logout')
+    
     Swal.fire({
       title: "Are you sure you want to Logout?",
       icon: "question",
+      color: "white",
       showCancelButton: true,
-      confirmButtonColor: "red",
-      cancelButtonColor: "black",
-      confirmButtonText: "Logout"
+      confirmButtonColor: "#BACDCD",
+      cancelButtonColor: "#cd5c5c",
+      confirmButtonText: "Logout",
+      iconColor: "#DCE0D9",
+      background: "#546E7A",
     })
-    .then((response) => {
-     
-        // console.log(response.data)
+    .then((result) => {
+      if (result.isConfirmed) {
+        axios.post('/logout')
         setProgramObjs([])
         body.style.backgroundImage = 'url("./images/wavebackground.png")'
+      }
     })
+    
+  
 
 }
 
