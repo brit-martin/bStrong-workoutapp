@@ -8,9 +8,12 @@ const sequelize = new Sequelize('postgresql:///workout_app', {
         timestamps: false,
     },
     dialectOptions:{useUTC:true}
+    //this makes it use british time meaning the time is the same for every user
 })
 
 class Program extends Model {
+    //these lines makes the terminal in VS code look prettier
+    //aka easier to read
     [util.inspect.custom]() {
         return this.toJSON();
       }

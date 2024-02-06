@@ -38,7 +38,7 @@ app.get('/workout', loginRequired, async (req, res) => {
         }
     })
 
-    console.log(scheduleDate)
+    // console.log(scheduleDate)
     // console.log(program)
 
     let programRegimen = await program.getExercises({

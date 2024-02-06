@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { Button } from 'react-bootstrap'
 import './exercise.css'
+import Swal from 'sweetalert2'
+
 
 export default function Exercise({element, exercises}) {
     let [repInput, setRepInput] = useState(element.goal)
@@ -23,7 +25,18 @@ export default function Exercise({element, exercises}) {
         axios.post('/new-rep', body)
         .then ((response) => {
             setRepInput(response.data.goal)
-            alert("Rep goal saved")
+            Swal.fire({
+                title: "New rep goal saved!",
+                icon: "success",
+                iconColor: "#BACDCD",
+                width: 600,
+                padding: "3em",
+                color: "white",
+                background: "#546E7A",
+                showConfirmButton: false,
+                timer: 1800,
+            })
+            
         })
         .catch ((error) => {
             console.log(error)

@@ -6,6 +6,7 @@ import './login.css'
 import FloatingLabel from 'react-bootstrap/FloatingLabel'
 import Form from 'react-bootstrap/Form'
 import Container from 'react-bootstrap/Container'
+import Swal from 'sweetalert2'
 
 
 export default function Login(props){ 
@@ -52,6 +53,7 @@ export default function Login(props){
         .then((response) => {
             console.log(response.data)
             setRefresh(!refresh)
+          
         })
         .catch((error) => {
             console.log(error)

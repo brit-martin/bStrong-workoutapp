@@ -10,7 +10,7 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Login from './components/Login';
-
+import Swal from 'sweetalert2'
 
 
 export default function App() {
@@ -57,9 +57,18 @@ export default function App() {
 
   function logoutButton(event){
     event.preventDefault()
-
+ 
     axios.post('/logout')
+    Swal.fire({
+      title: "Are you sure you want to Logout?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "red",
+      cancelButtonColor: "black",
+      confirmButtonText: "Logout"
+    })
     .then((response) => {
+     
         // console.log(response.data)
         setProgramObjs([])
         body.style.backgroundImage = 'url("./images/wavebackground.png")'
@@ -91,7 +100,7 @@ export default function App() {
       <br></br>
       <Row>
         <Col xs="2"></Col>
-        <Col>
+        <Col className="center-homepage-image">
               <img
                 className="homepage-image"
                 src="https://static.vecteezy.com/system/resources/thumbnails/026/781/389/small_2x/gym-interior-background-of-dumbbells-on-rack-in-fitness-and-workout-room-photo.jpg"

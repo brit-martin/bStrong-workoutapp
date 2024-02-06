@@ -4,6 +4,7 @@ import axios from 'axios'
 import Exercise from './Exercise.jsx'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import './program.css'
+import Swal from 'sweetalert2'
 
 export default function Program(props){
 
@@ -44,17 +45,38 @@ export default function Program(props){
 
     function ResetRepsButton(){
         
-        axios.delete(`/reset-rep?scheduleId=${props.displayedProgramId}`)
-        .then((response)=>{
-            alert(response.data.message)
-            // getExercisePrograms()
-            // setShow(false);
+        Swal.fire({
+            title: "Are you sure you want to reset your reps?",
+            text: "You wont be able to revert this.",
+            icon: "warning",
+            iconColor: "black",
+            color: "white",
+            showCancelButton: true,
+            background: "#546E7A",
+            confirmButtonColor: "black",
+            cancelButtonColor: "#D05353",
+            confirmButtonText: "Yes, reset them.",
+        }).then ((result) => {
+            console.log(result)
+            if (result.isConfirmed) {
+                axios.delete(`/reset-rep?scheduleId=${props.displayedProgramId}`)
+                Swal.fire({
+                    title: "Reset!",
+                    text: "Your reps have been reset.",
+                    icon: "success",
+                    iconColor: "#DCE0D9",
+                    background: "#546E7A",
+                    color: "white",
+                    confirmButtonColor: "#BACDCD",
+                })  
+            }
+        })
+        .then((response)=>{       
             setDisplayedProgramId(-1)
         })
         .catch ((error) => {
             console.log(error)
         })
-
     }
 
     return (
