@@ -31,17 +31,4 @@ they favorited so if they want to do them again they have access to them.
 
 
 
-TO DO:-----------------------
-get a basic component tree nailed down
-think of what end points I need
-think of queries I need to get my data from my tables
-Figure out how to add images to the programs
-make them into cards on bootstrap
-finish my delete end point
-add a heart icon to my favorite button
-style the page so its more pleasing for the user and easy to follow
-
-add a button that pulls up all your favorited info so you can see all the workouts you liked
-
-
 
