@@ -9,7 +9,7 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "seed": "node scripts/seeds.js",
-    "initdb": "droppdb workout_app && createdb workout_app"
+    "initdb": "dropdb --if-exists workout_app && createdb workout_app"
   },
   "dependencies": {
     "axios": "^1.6.5",

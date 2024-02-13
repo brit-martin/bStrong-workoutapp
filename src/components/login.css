@@ -28,7 +28,6 @@ h3 {
     height: 530px;
     max-width: 90vw;
     backdrop-filter: blur(10px);
-    /* position: relative; */
 }
 
 .signup-form {
@@ -53,8 +52,8 @@ h3 {
     height: 400px;
     max-width: 90vw;
     backdrop-filter: blur(10px);
-    /* position: relative; */
 }
+
 .login-container {
     padding: 10px;
     position: absolute;
@@ -70,9 +69,11 @@ h3 {
 .login {
     padding: 4px;
 }
+
 .loginbtn {
     margin: 6px;
 }
+
 .btn-container {
     display: flex;
 }
