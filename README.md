@@ -1,4 +1,4 @@
-# Gym Junkie
+# bStrong
 
 ## Struggling to figure out your workout routine? Introducing the ultimate solution: our dynamic webpage offering 5 sensational workout regimens. Say hello to seamless fitness planning!
 

@@ -8,12 +8,11 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
-  session({ secret: "woorrrkkkk", saveUninitialized: true, resave: false }),
+  session({ secret: "woorrrkkkk", saveUninitialized: true, resave: false })
 );
 
 //middleware function that checks if the user is logged in.
 function loginRequired(req, res, next) {
- 
   if (!req.session.userId) {
     res.status(401).json({ error: "Unauthorized" });
   } else {
@@ -37,7 +36,6 @@ app.get("/workout", loginRequired, async (req, res) => {
       model: Goal,
     },
   });
-
 
   let programRegimen = await program.getExercises({
     attributes: ["name", "reps", "sets"],
@@ -66,7 +64,6 @@ app.get("/workout", loginRequired, async (req, res) => {
     programDateObj.exerciseId = programObj.ExercisePrograms.exerciseId;
 
     programDateArray.push(programDateObj);
-
   }
   res.status(200).send(programDateArray);
 });
@@ -129,7 +126,7 @@ app.post("/new-rep", loginRequired, async (req, res) => {
       { goal: newGoal },
       {
         where: { exerciseId },
-      },
+      }
     );
   }
 
@@ -233,7 +230,7 @@ app.post("/login", async (req, res) => {
   if (user && user.password === password) {
     req.session.userId = user.id; //makes session (aka cookie aka session id number)
     console.log(user.id);
-    res.send({ sucess: true });
+    res.send({ success: true });
   } else {
     res.send({ success: false });
   }
